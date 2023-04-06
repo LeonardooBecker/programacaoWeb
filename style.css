@@ -1,0 +1,61 @@
+p{
+    color: white;
+}
+
+body{
+    background-color: gray;
+    margin: 0px;
+    height: 100%;
+}
+
+.meio{
+    background-color: #282828;
+    color: lightgray;
+    display: flex;   
+    min-height: 100vh;
+}
+
+main{
+    padding: 100px;
+}
+
+nav{
+    padding: 80px;
+    background-color: #1F1B24;
+}
+
+ul{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    display: block;
+}
+
+li{
+    text-decoration: none;
+    margin: 30px;
+    background-color: #1F1B24;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+
+li a{
+    text-decoration: none;
+    color: lightgray;
+    padding: 10px;
+}
+
+li a:hover{
+    background-color: lightgray;
+    border-radius: 10px;
+    color: #1F1B24;
+}
+
+.fotoPerfil{
+    width: 200px;
+    border-radius: 200px;
+    border-color: black;
+    border-style: solid;
+    border-width: 2px;
+}
