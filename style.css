@@ -33,11 +33,12 @@ ul{
 
 li{
     text-decoration: none;
-    margin: 30px;
+    margin: 60px 30px;
     background-color: #1F1B24;
     text-align: center;
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
+    font-size: 20px;
 }
 
 li a{
@@ -53,9 +54,13 @@ li a:hover{
 }
 
 .fotoPerfil{
-    width: 200px;
-    border-radius: 200px;
+    width: 250px;
+    border-radius: 250px;
     border-color: black;
     border-style: solid;
     border-width: 2px;
+}
+
+article{
+    font-family: 'Roboto', 'sans-serif';
 }
