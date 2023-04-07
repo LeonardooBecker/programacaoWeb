@@ -117,7 +117,7 @@ article{
     padding: 15px 15px;
     text-decoration: none;
     color: lightgray;
-    font-size: 30px;
+    font-size: 28px;
 
 }
 
@@ -176,5 +176,8 @@ a.Projetos:hover{
     }
     main{
         padding: 0px;
+    }
+    article{
+        font-size: 15px;
     }
 }
