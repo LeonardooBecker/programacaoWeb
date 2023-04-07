@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/2d611c54d2.js" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="meio">
+        <nav>
+            <h1 id="nomePrincipal">Leonardo Becker</h1>
+            <img src="leonardo.jpeg" class="fotoPerfil" alt="foto de perfil">
+            <ul>
+                <li><a href="index.html"><i class="fa-solid fa-house"></i>&emsp;Home</a></li>
+                <li><a href="iniciacao.html"><i class="fa-solid fa-book"></i>&emsp;Iniciação Científica</a></li>
+                <li><a href="projetos.html"><i class="fa-solid fa-diagram-project"></i>&emsp;Projetos</a></li>
+                <li><a href="https://www.linkedin.com/in/leonardobeckeroliveira/" target="_blank"><i class="fa-brands fa-linkedin"></i>&emsp;Linkedin</a></li>
+                <li><a href="https://github.com/LeonardooBecker" target="_blank"><i class="fa-brands fa-github"></i>&emsp;GitHub</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <article>
+                <h1>Iniciação científica</h1>
+                <div class="topic">
+                    <a href="#PlataformaColeta" class="menuIniciação">Plataforma de coleta</a>
+                    <a href="#TratamentoDados" class="menuIniciação">Tratamento dos dados</a>
+                    <a href="#PainelVisualizazao" class="menuIniciação">Painel de visualização</a>
+                </div>
+                <h3 id="PlataformaColeta">
+                    Plataforma de coleta
+                </h3>
+                <p>
+                    Para realizar a captura das imagens dos contudores e dos dados de GPS para cada viagem efetuada pelos participantes da pesquisa, foi utilizado um conjunto de duas camêras veículares que possuem a geolocalização integrada ao seu sistema.
+                </p>
+                <p>
+                    As camêras foram dispostas internamente ao veículo. A primeira delas aponta para o interior do automóvel, visando coletar as ações como mexer no telefone celular, interagir com painel digital do carro, entre outros. A segunda é responsável por registrar as imagens frontais do veículo, ou seja, tudo que acontece externamente interferindo em cada ação tomada pelo condutor.
+                </p>
+                <img src="carro.jpeg" alt="Carro contendo a disposição das câmeras" class="camerasCarro">
+                
+                <h3 id="TratamentoDados">
+                    Tratamento dos dados
+                </h3>
+                <p>
+                    Os dados obtidos da maneira anteriormente descrita, seguem um padrão em que há separações cíclicas de 3 minutos no armazenamento dos vídeos e os dados de GPS são disponibilizados em apenas um arquivo txt.
+                </p>
+                <p>
+                    Com isso, foram desenvolvidos utilizando as linguagens C, Shell e Python, softwares responsáveis por concatenar os vídeos de cada viagem realizada pelo condutor, junto da seção de dados do GPS refentes a devida deslocamento.
+                </p>
+
+                <a href="https://github.com/LeonardooBecker/icTransporte" target="_blank" class="links">
+                    <i class="fa fa-github"></i>
+                    &emsp;Acesso ao código fonte
+                </a>
+
+                <h3 id="PainelVisualizazao">
+                    Painel de visualização
+                </h3>
+                <p>
+                    Finalizado as etapas de coleta e tratamento dos dados, esses são disponibilizados aos estudos naturalísticos de direção, mais especificamente no âmbito brasileiro. Portanto são observados os comportamentos de cada condutor, e registrados em planilhas CSV.
+                </p>
+                <p>
+                    O acesso as planilhas que documentam os comportamentos de cada condutor, permite que dados sejam extraídos, posteriormente apresentados em resultados finais no painel de visualização.
+                </p>
+                <p>
+                    O painel foi desenvolvido em python junto da biblioteca <a href="https://streamlit.io/" target="_blank" class="textStreamlit"><em>streamlit</em></a>, que permite a apresentação de resultados em uma página web hospedada pelos mesmos. Além disso, a biblioteca conta com funções que apresentam de forma dinâmica os banco de dados, podendo ser através de gráficos, imagens ou mapas interativos.
+                </p>
+                <img src="painel.png" alt="print do painel de visualização" class="painelVisu">
+                <a href="" class="links">
+                    <img src="streamlit-mark-light.png" alt="logo streamlit" class="logoStreamlit">
+                    &emsp;Acesso ao painel de visualização do projeto - Atualmente fora do ar :( 
+                </a>
+
+
+
+            </article>
+        </main>
+    </div>
+
+    
+    <footer>
+        <p><i class="fa-solid fa-copyright"></i>&emsp;LEONARDO BECKER DE OLIVEIRA - CIENCIA DA COMPUTACAO - UFPR</p>
+    </footer>
+</body>
+
+</html>

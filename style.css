@@ -19,12 +19,12 @@ body{
 }
 
 main{
-    padding: 100px;
+    padding: 20px 100px;
     width: 100%;
 }
 
 nav{
-    padding: 80px;
+    padding: 20px 80px;
     background-image: radial-gradient(ellipse, #1F1B24, #131116);
 }
 
@@ -142,6 +142,25 @@ footer{
     text-align: center;
     background-color: #130f18;
     background-image: radial-gradient(ellipse, #130f18, #08060a);
+    flex-grow: 0;
+}
+
+a.Projetos{
+    text-align: center;
+    display: block;
+    width: fit-content;
+    margin: 30px auto;
+    color: #00ced1;
+}
+
+a.Projetos:hover{
+    color: #169496;
+}
+
+#nomePrincipal{
+    font-family: 'Roboto', 'sans-serif';
+    margin: none;
+    font-size: 30px;
 }
 
 /* Recursividade */
