@@ -1,13 +1,3 @@
-# def a_method(a,b)
-#     if block_given?
-#         5+yield(a,b)
-#     else
-#         a+b
-#     end
-# end
-# puts a_method(1,2){|x,y| (x+y)*3}
-
-
 require 'rubygems'
 require 'active_record'
 
@@ -26,7 +16,7 @@ end
 
 
 
-#Analisa as colunas da tabela
+#Retorna todas as colunas da tabela
 def verificar(tabela)
     DataBase.connection.columns(tabela).map(&:name)
 end

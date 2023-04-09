@@ -87,7 +87,7 @@ article{
     border-radius: 25px;
     border-color: black;
     border-style: solid;
-    font-size: 25px;
+    font-size: 18px;
     text-decoration: none;
     text-align: center;
 }
@@ -143,6 +143,7 @@ footer{
     background-color: #130f18;
     background-image: radial-gradient(ellipse, #130f18, #08060a);
     flex-grow: 0;
+    font-size: 12px;
 }
 
 a.Projetos{
@@ -179,5 +180,11 @@ a.Projetos:hover{
     }
     article{
         font-size: 15px;
+    }
+    .links{
+        font-size: 15px;
+    }
+    footer{
+        font-size: 10px;
     }
 }
