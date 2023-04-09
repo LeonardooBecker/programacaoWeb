@@ -67,6 +67,7 @@ if(ARGV[0]=="insere")
     end
 end
 
+
 #Procurar no banco
 if(ARGV[0]=="exclui")
     tabela=ARGV[1]
@@ -88,20 +89,30 @@ if(ARGV[0]=="exclui")
     end
 end 
 
-# class Estado < ActiveRecord::Base;
-# end
 
-# est=Estado.new()
-# est.nome="Acre"
-# est.sigla="AC"
-# est.save
-
-# a = Estado.create(id:26,sigla:"PR",nome:"Paraná")
-# a.save
-
-
-# ests=Estado.all
-
-# ests.each do |e|
-#     puts "#{e.sigla} = #{e.nome}"
-# end
+#Alterar database
+if(ARGV[0]=="alterar")
+    tabela=ARGV[1]
+    if (DataBase.connection.table_exists? tabela)
+        class MyTable < DataBase
+            self.table_name="#{ARGV[1]}"
+        end
+        for i in 2..(ARGV.length-1)
+            
+            infos=ARGV[i].split('=')
+            if(i%2 == 0)
+                hashTableNovo={}
+                hashTableAtual={}
+                hashTableAtual[(infos[0])]=infos[1]
+            else
+                hashTableNovo[(infos[0])]=infos[1]
+                # Localizado aqui pois so ocorre quando dois valores forem passados, ou seja, quando houver um valor válido no hashTableNovo
+                lines= MyTable.where(hashTableAtual)
+                lines.each do |tupla|
+                    puts tupla
+                    tupla.update(hashTableNovo)
+                end
+            end
+        end
+    end
+end 
