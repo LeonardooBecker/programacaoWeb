@@ -50,6 +50,7 @@ end
 
 
 
+#Função de inserir
 if(ARGV[0]=="insere")
     tabela=ARGV[1]
     if (DataBase.connection.table_exists? tabela)
@@ -61,12 +62,31 @@ if(ARGV[0]=="insere")
             infos=ARGV[i].split('=')
             hashTable[(infos[0])]=infos[1]
         end
-        puts hashTable
         line=MyTable.new(hashTable)
         line.save
     end
 end
 
+#Procurar no banco
+if(ARGV[0]=="exclui")
+    tabela=ARGV[1]
+    if (DataBase.connection.table_exists? tabela)
+        class MyTable < DataBase
+            self.table_name="#{ARGV[1]}"
+        end
+        hashTable={}
+        for i in 2..(ARGV.length-1)
+            infos=ARGV[i].split('=')
+            hashTable[(infos[0])]=infos[1]
+            lines= MyTable.where(hashTable)
+            lines.each do |tupla|
+                puts tupla
+                tupla.delete
+            end
+
+        end
+    end
+end 
 
 # class Estado < ActiveRecord::Base;
 # end
