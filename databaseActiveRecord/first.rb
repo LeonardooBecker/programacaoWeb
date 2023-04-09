@@ -18,7 +18,7 @@ end
 
 
 # Lista todas as tabelas de um banco de dados
-if(ARGV[0]=="listar")
+if(ARGV[0]=="listarTabelas")
     DataBase.connection.tables.each do |table|
         puts table
     end
@@ -27,13 +27,11 @@ end
 
 
 #Analisa as colunas da tabela
-if(ARGV[0]=="verificar")
-    # lista o nome de todas as colunas do database
-    tabela=ARGV[1]
-    puts DataBase.connection.columns(tabela).map(&:name)
+def verificar(tabela)
+    DataBase.connection.columns(tabela).map(&:name)
 end
 
-
+#Cria tabela
 if(ARGV[0]=="criar")
     # Só cria a tabela se ela ainda não existir
     tabela=ARGV[1]
@@ -47,6 +45,23 @@ if(ARGV[0]=="criar")
     end
 end
 
+#Lista todas as tuplas da tabela
+if(ARGV[0]=="lista")
+    tabela=ARGV[1]
+    if (DataBase.connection.table_exists? tabela)
+        class MyTable < DataBase
+            self.table_name="#{ARGV[1]}"
+        end
+        lines=MyTable.all
+        lines.each do |tupla|
+            tables=verificar(tabela)
+            tables.each do |colum|
+                print "#{tupla[colum]} "
+            end
+            print "\n"
+        end
+    end
+end
 
 
 
