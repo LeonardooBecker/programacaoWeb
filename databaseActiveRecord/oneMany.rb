@@ -177,7 +177,6 @@ def hashTableExclusao()
         if(ehTabela=="none")
             hashTable[(infos[0])]=infos[1]
         else
-            #cria com a primeira referencia encontrada
             cmd=retornaInfo(ehTabela,infos[1])
             cmd.each do |t|
             #transforma o xy_id em apenas xy
