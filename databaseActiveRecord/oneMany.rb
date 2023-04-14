@@ -80,13 +80,6 @@ def verificar(tabela)
     ActiveRecord::Base.connection.columns(tabela).map(&:name)
 end
 
-tables=verificar("alunos")
-
-Aluno.find_by_sql("SELECT * from alunos WHERE nome = 'CESAR'")
-
-etab="alunos"
-var="LEONARDO"
-
 def retornaInfo(tabela,valor)
     tables=verificar(tabela)
     tables.each do |column|
@@ -97,11 +90,6 @@ def retornaInfo(tabela,valor)
         end
     end
 end
-
-aln=retornaInfo("alunos","LEONARDO")
-puts aln.sobrenome
-# aln = Aluno.find_by_sql("SELECT * from #{var} WHERE CONCAT(nome, sobrenome) = 'LEONARDO'")
-# puts aln[0].sobrenome
 
 
 def verificaParametro(word)
@@ -120,23 +108,29 @@ def verificaParametro(word)
 end
 
 
+
 if(ARGV[0]=="insere")
     tabela=ARGV[1]
     case ARGV[1]
     when "matriculas"
-        matricula=Matricula.new()
         hashTable={}
         for i in 2..(ARGV.length-1)
             infos=ARGV[i].split('=')
-
+            
             ehTabela=verificaParametro(infos[0])
             if(ehTabela=="none")
                 hashTable[(infos[0])]=infos[1]
             else
-                
+                aluno=retornaInfo(ehTabela,infos[1])
+                #transforma o aluno_id em apenas aluno
+                chave=(infos[0].split('_'))[0]
+                hashTable[chave]=aluno
             end
         end
         puts hashTable
+        matricula=Matricula.new(hashTable)
+        matricula.save
+        
     else
         return
     end
