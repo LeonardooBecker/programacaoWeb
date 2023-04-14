@@ -140,10 +140,39 @@ def criaHashTable()
     return hashTable
 end
 
+def hashTableAlDp()
+    hashTable={}
+    htables=[]
+    chaveAnt=""
+    for i in 2..(ARGV.length-1)
+        infos=ARGV[i].split('=')            
+        ehTabela=verificaParametro(infos[0])
+        if(ehTabela=="none")
+            hashTable[(infos[0])]=infos[1]
+        else
+            cmd=retornaInfo(ehTabela,infos[1])
+            cmd.each do |t|
+            #transforma o xy_id em apenas xy
+                chave=(infos[0].split('_'))[0]
+                if(chave!=chaveAnt && chaveAnt!="")
+                    htables.each do |table|
+                        table[chave]=t
+                    end
+                    return htables
+                end
+                chaveAnt=chave
+                hashTable={}
+                hashTable[chave]=t
+                htables.push(hashTable)
+            end
+        end
+    end
+    return htables
+end
+
 if(ARGV[0]=="insere")
     tabela=ARGV[1]
     hashTable=criaHashTable()
-    puts hashTable
     case tabela
     when "departamentos"
         departamento=Departamento.new(hashTable)
@@ -164,13 +193,18 @@ if(ARGV[0]=="insere")
         matricula=Matricula.new(hashTable)
         matricula.save
     when "alunos_departamentos"
-        alDp=AlunosDepartamento.new(hashTable)
-        alDp.save
+        hashs=hashTableAlDp()
+        puts hashs
+        hashs.each do |hashEncontrada|
+            alDp=AlunosDepartamento.new(hashEncontrada)
+            alDp.save
+        end
     end
 end
 
 def hashTableExclusao()
     htables=[]
+    hashTable={}
     for i in 2..(ARGV.length-1)
         infos=ARGV[i].split('=')            
         ehTabela=verificaParametro(infos[0])
@@ -187,33 +221,36 @@ def hashTableExclusao()
             end
         end
     end
+    if(htables.length==0)
+        htables.push(hashTable)
+    end
     return htables
 end
-
 
 if(ARGV[0]=="exclui")
     tabela=ARGV[1]
     hashs=hashTableExclusao()
+    puts hashs
     hashs.each do |hashTable|
         case tabela
         when "departamentos"
             departamento=Departamento.where(hashTable)
-            departamento.destroy
+            departamento.destroy.all
         when "disciplinas"
             disciplina=Disciplina.where(hashTable)
-            disciplina.destroy
+            disciplina.destroy.all
         when "codigos"
             codigo=Codigo.where(hashTable)
-            codigo.destroy
+            codigo.destroy.all
         when "alunos"
             aluno=Aluno.where(hashTable)
-            aluno.destroy
+            aluno.destroy_all
         when "estados"
             estado=Estado.where(hashTable)
-            estado.destroy
+            estado.destroy.all
         when "matriculas"
             matricula=Matricula.where(hashTable)
-            matricula.destroy
+            matricula.destroy.all
         when "alunos_departamentos"
             alDp=AlunosDepartamento.where(hashTable)
             alDp.destroy_all
