@@ -73,12 +73,18 @@ class Matricula < ActiveRecord::Base
     belongs_to :aluno
 end
 
+class AlunosDepartamento < ActiveRecord::Base
+    belongs_to :aluno
+    belongs_to :departamento
+end
 
 
 def retornaColunas(tabela)
     ActiveRecord::Base.connection.columns(tabela).map(&:name)
 end
 
+# aln=Aluno.find_by({:nome=>"JUCA"})
+# puts aln.matricula.ano
 
 def retornaInfo(tabela,valor)
     tables=retornaColunas(tabela)
@@ -163,6 +169,7 @@ end
 if(ARGV[0]=="exclui")
     tabela=ARGV[1]
     hashTable=criaHashTable()
+    puts hashTable
     case tabela
     when "departamentos"
         departamento=Departamento.find_by(hashTable)
@@ -183,67 +190,67 @@ if(ARGV[0]=="exclui")
         matricula=Matricula.find_by(hashTable)
         matricula.destroy
     when "alunos_departamentos"
-        hashTable["aluno"].departamentos.delete(hashTable["departamento"])
-        hashTable["departamento"].alunos.delete(hashTable["aluno"])
+        alDp=AlunosDepartamento.find_by(hashTable)
+        alDp.destroy 
     end
 end
 
-# mat=Matricula.new({:ano=>2021,:complemento=>1789})
-# mat.aluno=aln
-# mat.save
+def hashTableAlteracao()
+    hashTableAtual={}
+    hashTableNova={}
+    for i in 2..(ARGV.length-1)
+        infos=ARGV[i].split('=')  
+        if(i%2 == 0)          
+            ehTabela=verificaParametro(infos[0])
+            if(ehTabela=="none")
+                hashTableAtual[(infos[0])]=infos[1]
+            else
+                cmd=retornaInfo(ehTabela,infos[1])
+                #transforma o xy_id em apenas xy
+                chave=(infos[0].split('_'))[0]
+                hashTableAtual[chave]=cmd
+            end
+        else
+            ehTabela=verificaParametro(infos[0])
+            if(ehTabela=="none")
+                hashTableNova[(infos[0])]=infos[1]
+            else
+                cmd=retornaInfo(ehTabela,infos[1])
+                #transforma o xy_id em apenas xy
+                chave=(infos[0].split('_'))[0]
+                hashTableNova[chave]=cmd
+            end
+        end
+    end
+    return [hashTableAtual, hashTableNova]
+end
 
-# est=Estado.new({:sigla=>"PR",:nome=>"PARANA"})
-# est.save
-
-
-# est=Estado.find_by({:sigla=>"PR"})
-# puts est.nome
-
-# aln=Aluno.new({:nome=>"LEONARDO",:sobrenome=>"BECKER"})
-# aln.estado=est
-# aln.save
-
-# aln=Aluno.find_by({:nome=>"LEONARDO"})
-# puts aln.sobrenome
-
-# mat=Matricula.new({:ano=>2021,:complemento=>1779})
-# mat.aluno=aln
-# mat.save
-
-# dep=Departamento.new({:nome=>"DINF",:campus=>"POLITECNICO"})
-# dep.save
-
-# dep=Departamento.find_by({:nome=>"DINF"})
-# dis=Disciplina.new({:nome=>"PROGWEB",:professor=>"BMULLER"})
-# dis.departamento=dep
-# dis.save
-
-# dis=Disciplina.find_by({:nome=>"PROGWEB"})
-# cod=Codigo.new({:codigo=>"CI1010"})
-# cod.disciplina=dis
-# cod.save
-
-# dep1=Departamento.find_by({:nome=>"DINF"})
-
-# puts dep1.nome
-# alunos=Aluno.find_by({:nome=>"JUCA"})
-# puts alunos.sobrenome
-# dep1.alunos.destroy
-# alunos.departamentos.delete(dep1)
-# alunos.each do |aluno|
-#     puts aluno.nome
-#     aluno.departamentos
-# end
-
-
-
-
-# departamentos=Departamento.all
-# departamentos.each do |dep|
-#     dep.destroy
-#     # puts dep.name
-#     # mats=dep.mates
-#     # mats.each do |t|
-#     #     puts t.name
-#     # end
-# end
+if(ARGV[0]=="altera")
+    tabela=ARGV[1]
+    hashTables=hashTableAlteracao()
+    hashTableAtual=hashTables[0]
+    hashTableNova=hashTables[1]
+    case tabela
+    when "departamentos"
+        departamento=Departamento.find_by(hashTableAtual)
+        departamento.update(hashTableNova)
+    when "disciplinas"
+        disciplina=Disciplina.find_by(hashTableAtual)
+        disciplina.update(hashTableNova)
+    when "codigos"
+        codigo=Codigo.find_by(hashTableAtual)
+        codigo.update(hashTableNova)
+    when "alunos"
+        aluno=Aluno.find_by(hashTableAtual)
+        aluno.update(hashTableNova)
+    when "estados"
+        estado=Estado.find_by(hashTableAtual)
+        estado.update(hashTableNova)
+    when "matriculas"
+        matricula=Matricula.find_by(hashTableAtual)
+        matricula.update(hashTableNova)
+    when "alunos_departamentos"
+        alDp=AlunosDepartamento.find_by(hashTableAtual)
+        alDp.update(hashTableNova)
+    end
+end
