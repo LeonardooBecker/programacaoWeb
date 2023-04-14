@@ -6,33 +6,39 @@ ActiveRecord::Base.establish_connection :adapter => "sqlite3", :database => "Tab
 class DataBase < ActiveRecord::Base;
 end
 
-
-# Lista todas as tabelas de um banco de dados
-if(ARGV[0]=="listarTabelas")
+def mostrarTabelas()
     DataBase.connection.tables.each do |table|
         puts table
     end
 end
 
-
+# Lista todas as tabelas de um banco de dados
+if(ARGV[0]=="mostrarTabelas")
+    mostrarTabelas()
+end
 
 #Retorna todas as colunas da tabela
 def verificar(tabela)
     DataBase.connection.columns(tabela).map(&:name)
 end
 
-#Cria tabela
-if(ARGV[0]=="criar")
-    # Só cria a tabela se ela ainda não existir
-    tabela=ARGV[1]
-    if (! DataBase.connection.table_exists? tabela)
-        DataBase.connection.create_table :"#{tabela}" do |t|
-        t.string :sigla, limit: 2
-        t.string :nome
-        end
-    else
-        puts "Tabela já existente"
-    end
+# #Cria tabela
+# if(ARGV[0]=="criar")
+#     # Só cria a tabela se ela ainda não existir
+#     tabela=ARGV[1]
+#     if (! DataBase.connection.table_exists? tabela)
+#         DataBase.connection.create_table :"#{tabela}" do |t|
+#         t.string :sigla, limit: 2
+#         t.string :nome
+#         end
+#     else
+#         puts "Tabela já existente"
+#     end
+# end
+
+est="Estado"
+
+class Estado < ActiveRecord::Base
 end
 
 #Lista todas as tuplas da tabela
