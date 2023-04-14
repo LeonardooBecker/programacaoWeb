@@ -83,8 +83,10 @@ def retornaColunas(tabela)
     ActiveRecord::Base.connection.columns(tabela).map(&:name)
 end
 
-# aln=Aluno.find_by({:nome=>"JUCA"})
-# puts aln.matricula.ano
+
+# exclui aluno
+# exlcui aluno estado_id=
+# puts Aluno.find_by_sql("SELECT * from alunos WHERE sobrenome = 'BECKER'")
 
 def retornaInfo(tabela,valor)
     tables=retornaColunas(tabela)
@@ -100,7 +102,7 @@ def retornaInfo(tabela,valor)
             dado=Estado.find_by_sql("SELECT * from #{tabela} WHERE #{column} = '#{valor}'")
         end
         if(dado[0]!=nil)
-            return dado[0]
+            return dado
         end
     end
 end
@@ -128,7 +130,8 @@ def criaHashTable()
         if(ehTabela=="none")
             hashTable[(infos[0])]=infos[1]
         else
-            cmd=retornaInfo(ehTabela,infos[1])
+            #cria com a primeira referencia encontrada
+            cmd=(retornaInfo(ehTabela,infos[1]))[0]
             #transforma o xy_id em apenas xy
             chave=(infos[0].split('_'))[0]
             hashTable[chave]=cmd
@@ -161,37 +164,61 @@ if(ARGV[0]=="insere")
         matricula=Matricula.new(hashTable)
         matricula.save
     when "alunos_departamentos"
-        hashTable["aluno"].departamentos << hashTable["departamento"]
+        alDp=AlunosDepartamento.new(hashTable)
+        alDp.save
     end
+end
+
+def hashTableExclusao()
+    htables=[]
+    for i in 2..(ARGV.length-1)
+        infos=ARGV[i].split('=')            
+        ehTabela=verificaParametro(infos[0])
+        if(ehTabela=="none")
+            hashTable[(infos[0])]=infos[1]
+        else
+            #cria com a primeira referencia encontrada
+            cmd=retornaInfo(ehTabela,infos[1])
+            cmd.each do |t|
+            #transforma o xy_id em apenas xy
+                chave=(infos[0].split('_'))[0]
+                hashTable={}
+                hashTable[chave]=t
+                htables.push(hashTable)
+            end
+        end
+    end
+    return htables
 end
 
 
 if(ARGV[0]=="exclui")
     tabela=ARGV[1]
-    hashTable=criaHashTable()
-    puts hashTable
-    case tabela
-    when "departamentos"
-        departamento=Departamento.find_by(hashTable)
-        departamento.destroy
-    when "disciplinas"
-        disciplina=Disciplina.find_by(hashTable)
-        disciplina.destroy
-    when "codigos"
-        codigo=Codigo.find_by(hashTable)
-        codigo.destroy
-    when "alunos"
-        aluno=Aluno.find_by(hashTable)
-        aluno.destroy
-    when "estados"
-        estado=Estado.find_by(hashTable)
-        estado.destroy
-    when "matriculas"
-        matricula=Matricula.find_by(hashTable)
-        matricula.destroy
-    when "alunos_departamentos"
-        alDp=AlunosDepartamento.find_by(hashTable)
-        alDp.destroy 
+    hashs=hashTableExclusao()
+    hashs.each do |hashTable|
+        case tabela
+        when "departamentos"
+            departamento=Departamento.where(hashTable)
+            departamento.destroy
+        when "disciplinas"
+            disciplina=Disciplina.where(hashTable)
+            disciplina.destroy
+        when "codigos"
+            codigo=Codigo.where(hashTable)
+            codigo.destroy
+        when "alunos"
+            aluno=Aluno.where(hashTable)
+            aluno.destroy
+        when "estados"
+            estado=Estado.where(hashTable)
+            estado.destroy
+        when "matriculas"
+            matricula=Matricula.where(hashTable)
+            matricula.destroy
+        when "alunos_departamentos"
+            alDp=AlunosDepartamento.where(hashTable)
+            alDp.destroy_all
+        end
     end
 end
 
