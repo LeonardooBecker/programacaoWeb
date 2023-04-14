@@ -73,24 +73,30 @@ class Matricula < ActiveRecord::Base
     belongs_to :aluno
 end
 
-# Palavras protegidas - aluno
 
-
-def verificar(tabela)
+def retornaColunas(tabela)
     ActiveRecord::Base.connection.columns(tabela).map(&:name)
 end
 
+
 def retornaInfo(tabela,valor)
-    tables=verificar(tabela)
+    tables=retornaColunas(tabela)
     tables.each do |column|
-        # puts column
-        aln=Aluno.find_by_sql("SELECT * from #{tabela} WHERE #{column} = '#{valor}'")
-        if(aln[0]!=nil)
-            return aln[0]
+        case tabela
+        when "alunos"
+            dado=Aluno.find_by_sql("SELECT * from #{tabela} WHERE #{column} = '#{valor}'")
+        when "departamentos"
+            dado=Departamento.find_by_sql("SELECT * from #{tabela} WHERE #{column} = '#{valor}'")
+        when "disciplinas"
+            dado=Disciplina.find_by_sql("SELECT * from #{tabela} WHERE #{column} = '#{valor}'")
+        when "estados"
+            dado=Estado.find_by_sql("SELECT * from #{tabela} WHERE #{column} = '#{valor}'")
+        end
+        if(dado[0]!=nil)
+            return dado[0]
         end
     end
 end
-
 
 def verificaParametro(word)
     case word
@@ -107,42 +113,50 @@ def verificaParametro(word)
     end
 end
 
-
+def criaHashTable()
+    hashTable={}
+    for i in 2..(ARGV.length-1)
+        infos=ARGV[i].split('=')            
+        ehTabela=verificaParametro(infos[0])
+        if(ehTabela=="none")
+            hashTable[(infos[0])]=infos[1]
+        else
+            cmd=retornaInfo(ehTabela,infos[1])
+            #transforma o xy_id em apenas xy
+            chave=(infos[0].split('_'))[0]
+            hashTable[chave]=cmd
+        end
+    end
+    return hashTable
+end
 
 if(ARGV[0]=="insere")
     tabela=ARGV[1]
-    case ARGV[1]
+    hashTable=criaHashTable()
+    puts hashTable
+    case tabela
+    when "departamentos"
+        departamento=Departamento.new(hashTable)
+        departamento.save
+    when "disciplinas"
+        disciplina=Disciplina.new(hashTable)
+        disciplina.save
+    when "codigos"
+        codigo=Codigo.new(hashTable)
+        codigo.save
+    when "alunos"
+        aluno=Aluno.new(hashTable)
+        aluno.save
+    when "estados"
+        estado=Estado.new(hashTable)
+        estado.save
     when "matriculas"
-        hashTable={}
-        for i in 2..(ARGV.length-1)
-            infos=ARGV[i].split('=')
-            
-            ehTabela=verificaParametro(infos[0])
-            if(ehTabela=="none")
-                hashTable[(infos[0])]=infos[1]
-            else
-                aluno=retornaInfo(ehTabela,infos[1])
-                #transforma o aluno_id em apenas aluno
-                chave=(infos[0].split('_'))[0]
-                hashTable[chave]=aluno
-            end
-        end
-        puts hashTable
         matricula=Matricula.new(hashTable)
         matricula.save
-        
-    else
-        return
+    when "alunos_departamentos"
+        hashTable["aluno"].departamentos << hashTable["departamento"]
     end
 end
-
-
-# insere matricula ano="x" comp="y" aluno_id="LEONARDO"
-
-
-
-# aln = Aluno.find_by_sql("SELECT * from #{var} WHERE CONCAT(nome, sobrenome) = 'LEONARDO'")
-# puts aln[0].sobrenome
 
 # mat=Matricula.new({:ano=>2021,:complemento=>1789})
 # mat.aluno=aln
@@ -190,12 +204,12 @@ end
 
 
 
-departamentos=Departamento.all
-departamentos.each do |dep|
-    dep.destroy
-    # puts dep.name
-    # mats=dep.mates
-    # mats.each do |t|
-    #     puts t.name
-    # end
-end
+# departamentos=Departamento.all
+# departamentos.each do |dep|
+#     dep.destroy
+#     # puts dep.name
+#     # mats=dep.mates
+#     # mats.each do |t|
+#     #     puts t.name
+#     # end
+# end

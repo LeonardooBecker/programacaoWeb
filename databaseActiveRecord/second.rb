@@ -3,38 +3,70 @@ require 'active_record'
 ActiveRecord::Base.establish_connection:adapter=>"sqlite3",
                                         :database=>"Tabelas.sqlite3"
 
-# ActiveRecord::Base.connection.create_table :pessoas do |t|
-#     t.string:sobrenome
-#     t.string:nome
-#     t.string:endereco
-#     t.belongs_to :estado,foreign_key:true
-# end
+
+class Departamento < ActiveRecord::Base
+    has_many :disciplinas, dependent: :destroy
+    has_and_belongs_to_many :alunos, dependent: :destroy
+end
+
+class Disciplina < ActiveRecord::Base
+    belongs_to :departamento
+    has_one :codigo, dependent: :destroy
+end
+
+class Codigo < ActiveRecord::Base
+    belongs_to :disciplina
+end
 
 class Estado < ActiveRecord::Base;
-    has_many :pessoas, dependent: :destroy
+    has_many :alunos, dependent: :destroy
 end
 
-class Pessoa < ActiveRecord::Base;
+class Aluno < ActiveRecord::Base
     belongs_to :estado
+    has_one :matricula
+    has_and_belongs_to_many :departamentos, dependent: :destroy
 end
 
-est=Estado.find_by_sigla("PR")
-est.destroy
+class Matricula < ActiveRecord::Base
+    belongs_to :aluno
+end
+                                        
+est=Estado.new({:sigla=>"PR",:nome=>"PARANA"})
+est.save
 
-# pes=Pessoa.new()
-# pes.nome="LEONARDO"
-# pes.sobrenome="BECKER"
-# pes.endereco="RUA AUGUSTA"
-# pes.estado=est
-# pes.save
 
-# estados= Estado.all
-# estados.each do |estado|
-#     pessoas=estado.pessoas
-    
-#     # puts estado.nome
-#     # # pessoas=estado.pessoas
-#     pessoas.each do |m|
-#         puts m.nome
-#     end
-# end
+est=Estado.find_by({:sigla=>"PR"})
+puts est.nome
+
+aln=Aluno.new({:nome=>"LEONARDO",:sobrenome=>"BECKER"})
+aln.estado=est
+aln.save
+
+aln=Aluno.find_by({:nome=>"LEONARDO"})
+puts aln.sobrenome
+
+mat=Matricula.new({:ano=>2021,:complemento=>1779})
+mat.aluno=aln
+mat.save
+
+dep=Departamento.new({:nome=>"DINF",:campus=>"POLITECNICO"})
+dep.save
+
+dep=Departamento.find_by({:nome=>"DINF"})
+dis=Disciplina.new({:nome=>"PROGWEB",:professor=>"BMULLER"})
+dis.departamento=dep
+dis.save
+
+dis=Disciplina.find_by({:nome=>"PROGWEB"})
+cod=Codigo.new({:codigo=>"CI1010"})
+cod.disciplina=dis
+cod.save
+
+dep1=Departamento.find_by({:nome=>"DINF"})
+puts dep1.nome
+alunos=Aluno.all
+alunos.each do |aluno|
+    puts aluno.nome
+    aluno.departamentos << dep1
+end
