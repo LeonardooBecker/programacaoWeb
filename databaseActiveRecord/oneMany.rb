@@ -74,6 +74,7 @@ class Matricula < ActiveRecord::Base
 end
 
 
+
 def retornaColunas(tabela)
     ActiveRecord::Base.connection.columns(tabela).map(&:name)
 end
@@ -158,6 +159,35 @@ if(ARGV[0]=="insere")
     end
 end
 
+
+if(ARGV[0]=="exclui")
+    tabela=ARGV[1]
+    hashTable=criaHashTable()
+    case tabela
+    when "departamentos"
+        departamento=Departamento.find_by(hashTable)
+        departamento.destroy
+    when "disciplinas"
+        disciplina=Disciplina.find_by(hashTable)
+        disciplina.destroy
+    when "codigos"
+        codigo=Codigo.find_by(hashTable)
+        codigo.destroy
+    when "alunos"
+        aluno=Aluno.find_by(hashTable)
+        aluno.destroy
+    when "estados"
+        estado=Estado.find_by(hashTable)
+        estado.destroy
+    when "matriculas"
+        matricula=Matricula.find_by(hashTable)
+        matricula.destroy
+    when "alunos_departamentos"
+        hashTable["aluno"].departamentos.delete(hashTable["departamento"])
+        hashTable["departamento"].alunos.delete(hashTable["aluno"])
+    end
+end
+
 # mat=Matricula.new({:ano=>2021,:complemento=>1789})
 # mat.aluno=aln
 # mat.save
@@ -194,11 +224,15 @@ end
 # cod.save
 
 # dep1=Departamento.find_by({:nome=>"DINF"})
+
 # puts dep1.nome
-# alunos=Aluno.all
+# alunos=Aluno.find_by({:nome=>"JUCA"})
+# puts alunos.sobrenome
+# dep1.alunos.destroy
+# alunos.departamentos.delete(dep1)
 # alunos.each do |aluno|
 #     puts aluno.nome
-#     aluno.departamentos << dep1
+#     aluno.departamentos
 # end
 
 
