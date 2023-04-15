@@ -21,8 +21,8 @@ ActiveRecord::Base.establish_connection:adapter=>"sqlite3",
 # end
 
 # ActiveRecord::Base.connection.create_table :alunos_departamentos do |t|
-#     t.references :departamento
-#     t.references :aluno
+#     t.references :departamento, foreign_key: true
+#     t.references :aluno, foreign_key: true
 # end
 
 # ActiveRecord::Base.connection.create_table :matriculas do |t|
@@ -65,7 +65,7 @@ end
 
 class Aluno < ActiveRecord::Base
     belongs_to :estado
-    has_one :matricula
+    has_one :matricula, dependent: :destroy
     has_and_belongs_to_many :departamentos, dependent: :destroy
 end
 
@@ -78,15 +78,10 @@ class AlunosDepartamento < ActiveRecord::Base
     belongs_to :departamento
 end
 
-
 def retornaColunas(tabela)
     ActiveRecord::Base.connection.columns(tabela).map(&:name)
 end
 
-
-# exclui aluno
-# exlcui aluno estado_id=
-# puts Aluno.find_by_sql("SELECT * from alunos WHERE sobrenome = 'BECKER'")
 
 def retornaInfo(tabela,valor)
     tables=retornaColunas(tabela)
@@ -235,22 +230,26 @@ if(ARGV[0]=="exclui")
         case tabela
         when "departamentos"
             departamento=Departamento.where(hashTable)
-            departamento.destroy.all
+            departamento.destroy_all
         when "disciplinas"
             disciplina=Disciplina.where(hashTable)
-            disciplina.destroy.all
+            puts disciplina
+            disciplina.destroy_all
         when "codigos"
             codigo=Codigo.where(hashTable)
-            codigo.destroy.all
+            codigo.destroy_all
         when "alunos"
             aluno=Aluno.where(hashTable)
             aluno.destroy_all
         when "estados"
             estado=Estado.where(hashTable)
-            estado.destroy.all
+            estado.each do |t|
+                t.alunos.each(&:destroy)
+            end
+                estado.destroy_all
         when "matriculas"
             matricula=Matricula.where(hashTable)
-            matricula.destroy.all
+            matricula.destroy_all
         when "alunos_departamentos"
             alDp=AlunosDepartamento.where(hashTable)
             alDp.destroy_all
@@ -268,7 +267,7 @@ def hashTableAlteracao()
             if(ehTabela=="none")
                 hashTableAtual[(infos[0])]=infos[1]
             else
-                cmd=retornaInfo(ehTabela,infos[1])
+                cmd=(retornaInfo(ehTabela,infos[1]))[0]
                 #transforma o xy_id em apenas xy
                 chave=(infos[0].split('_'))[0]
                 hashTableAtual[chave]=cmd
@@ -278,7 +277,7 @@ def hashTableAlteracao()
             if(ehTabela=="none")
                 hashTableNova[(infos[0])]=infos[1]
             else
-                cmd=retornaInfo(ehTabela,infos[1])
+                cmd=(retornaInfo(ehTabela,infos[1]))[0]
                 #transforma o xy_id em apenas xy
                 chave=(infos[0].split('_'))[0]
                 hashTableNova[chave]=cmd
@@ -315,5 +314,75 @@ if(ARGV[0]=="altera")
     when "alunos_departamentos"
         alDp=AlunosDepartamento.find_by(hashTableAtual)
         alDp.update(hashTableNova)
+    end
+end
+
+
+if(ARGV[0]=="lista")
+    tabela=ARGV[1]
+    case tabela
+    when "departamentos"
+        lines=Departamento.all
+        lines.each do |tupla|
+            tables=Departamento.connection.columns(tabela).map(&:name)
+            tables.each do |colum|
+                print " #{tupla[colum]} |"
+            end
+            print "\n"
+        end
+    when "disciplinas"
+        lines=Disciplina.all
+        lines.each do |tupla|
+            tables=Disciplina.connection.columns(tabela).map(&:name)
+            tables.each do |colum|
+                print " #{tupla[colum]} |"
+            end
+            print "\n"
+        end
+    when "codigos"
+        lines=Codigo.all
+        lines.each do |tupla|
+            tables=Codigo.connection.columns(tabela).map(&:name)
+            tables.each do |colum|
+                print " #{tupla[colum]} |"
+            end
+            print "\n"
+        end
+    when "alunos"
+        lines=Aluno.all
+        lines.each do |tupla|
+            tables=Aluno.connection.columns(tabela).map(&:name)
+            tables.each do |colum|
+                print " #{tupla[colum]} |"
+            end
+            print "\n"
+        end
+    when "estados"
+        lines=Estado.all
+        lines.each do |tupla|
+            tables=Estado.connection.columns(tabela).map(&:name)
+            tables.each do |colum|
+                print " #{tupla[colum]} |"
+            end
+            print "\n"
+        end
+    when "matriculas"
+        lines=Matricula.all
+        lines.each do |tupla|
+            tables=Matricula.connection.columns(tabela).map(&:name)
+            tables.each do |colum|
+                print " #{tupla[colum]} |"
+            end
+            print "\n"
+        end
+    when "alunos_departamentos"
+        lines=AlunosDepartamento.all
+        lines.each do |tupla|
+            tables=AlunosDepartamento.connection.columns(tabela).map(&:name)
+            tables.each do |colum|
+                print " #{tupla[colum]} |"
+            end
+            print "\n"
+        end
     end
 end
