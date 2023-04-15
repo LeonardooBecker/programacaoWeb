@@ -323,64 +323,92 @@ if(ARGV[0]=="lista")
     case tabela
     when "departamentos"
         lines=Departamento.all
+        tables=Departamento.connection.columns(tabela).map(&:name)
+        tables.each do |name|
+            printf("%-20s  ",name)
+        end
+        print "\n"
         lines.each do |tupla|
-            tables=Departamento.connection.columns(tabela).map(&:name)
-            tables.each do |colum|
-                print " #{tupla[colum]} |"
+            tables.each do |column|
+                printf("| %-20s",tupla[column])
             end
             print "\n"
         end
     when "disciplinas"
         lines=Disciplina.all
+        tables=Disciplina.connection.columns(tabela).map(&:name)
+        tables.each do |name|
+            printf("%-20s  ",name)
+        end
+        print "\n"
         lines.each do |tupla|
-            tables=Disciplina.connection.columns(tabela).map(&:name)
-            tables.each do |colum|
-                print " #{tupla[colum]} |"
+            tables.each do |column|
+                printf("| %-20s",tupla[column])
             end
             print "\n"
         end
     when "codigos"
         lines=Codigo.all
+        tables=Codigo.connection.columns(tabela).map(&:name)
+        tables.each do |name|
+            printf("%-20s  ",name)
+        end
+        print "\n"
         lines.each do |tupla|
-            tables=Codigo.connection.columns(tabela).map(&:name)
-            tables.each do |colum|
-                print " #{tupla[colum]} |"
+            tables.each do |column|
+                printf("| %-20s",tupla[column])
             end
             print "\n"
         end
     when "alunos"
         lines=Aluno.all
+        tables=Aluno.connection.columns(tabela).map(&:name)
+        tables.each do |name|
+            printf("%-20s  ",name)
+        end
+        print "\n"
         lines.each do |tupla|
-            tables=Aluno.connection.columns(tabela).map(&:name)
-            tables.each do |colum|
-                print " #{tupla[colum]} |"
+            tables.each do |column|
+                printf("| %-20s",tupla[column])
             end
             print "\n"
         end
     when "estados"
         lines=Estado.all
+        tables=Estado.connection.columns(tabela).map(&:name)
+        tables.each do |name|
+            printf("%-20s  ",name)
+        end
+        print "\n"
         lines.each do |tupla|
-            tables=Estado.connection.columns(tabela).map(&:name)
-            tables.each do |colum|
-                print " #{tupla[colum]} |"
+            tables.each do |column|
+                printf("| %-20s",tupla[column])
             end
             print "\n"
         end
     when "matriculas"
         lines=Matricula.all
+        tables=Matricula.connection.columns(tabela).map(&:name)
+        tables.each do |name|
+            printf("%-20s  ",name)
+        end
+        print "\n"
         lines.each do |tupla|
-            tables=Matricula.connection.columns(tabela).map(&:name)
-            tables.each do |colum|
-                print " #{tupla[colum]} |"
+            tables.each do |column|
+                printf("| %-20s",tupla[column])
             end
             print "\n"
         end
     when "alunos_departamentos"
         lines=AlunosDepartamento.all
+        tables=AlunosDepartamento.connection.columns(tabela).map(&:name)
+        tables.each do |name|
+            printf("%-20s  ",name)
+        end
+        print "\n"
         lines.each do |tupla|
-            tables=AlunosDepartamento.connection.columns(tabela).map(&:name)
-            tables.each do |colum|
-                print " #{tupla[colum]} |"
+            tables.each do |column|
+                printf("| %-20s",tupla[column])
             end
             print "\n"
         end
