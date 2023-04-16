@@ -16,26 +16,6 @@ def retornaColunas(tabela)
     ActiveRecord::Base.connection.columns(tabela).map(&:name)
 end
 
-
-# def retornaInfo(tabela,valor)
-#     tables=retornaColunas(tabela)
-#     tables.each do |column|
-#         case tabela
-#         when "alunos"
-#             dado=Aluno.find_by_sql("SELECT * from #{tabela} WHERE #{column} = '#{valor}'")
-#         when "departamentos"
-#             dado=Departamento.find_by_sql("SELECT * from #{tabela} WHERE #{column} = '#{valor}'")
-#         when "disciplinas"
-#             dado=Disciplina.find_by_sql("SELECT * from #{tabela} WHERE #{column} = '#{valor}'")
-#         when "estados"
-#             dado=Estado.find_by_sql("SELECT * from #{tabela} WHERE #{column} = '#{valor}'")
-#         end
-#         if(dado[0]!=nil)
-#             return dado
-#         end
-#     end
-# end
-
 def verificaParametro(word)
     case word
     when "aluno_id"
