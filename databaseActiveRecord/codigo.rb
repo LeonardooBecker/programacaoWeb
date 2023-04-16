@@ -6,6 +6,7 @@ ActiveRecord::Base.establish_connection:adapter=>"sqlite3",
 
 
 class Codigo < ActiveRecord::Base
+    validates_presence_of :disciplina
     belongs_to :disciplina
     validates :disciplina, uniqueness: true
 end

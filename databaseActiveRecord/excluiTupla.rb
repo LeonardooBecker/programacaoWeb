@@ -23,29 +23,67 @@ def excluiTupla()
     hashs.each do |hashTable|
         case tabela
         when "departamentos"
-            departamento=Departamento.where(hashTable)
-            departamento.destroy_all
-        when "disciplinas"
-            disciplina=Disciplina.where(hashTable)
-            disciplina.destroy_all
-        when "codigos"
-            codigo=Codigo.where(hashTable)
-            codigo.destroy_all
-        when "alunos"
-            aluno=Aluno.where(hashTable)
-            aluno.destroy_all
-        when "estados"
-            estado=Estado.where(hashTable)
-            estado.each do |t|
-                t.alunos.each(&:destroy)
+            if !hashTable.empty?
+                departamento=Departamento.where(hashTable)
+                if departamento.empty?
+                    printf("Não foram encontrados valores validos\n")
+                end
+                departamento.destroy_all
             end
+        when "disciplinas"
+            if !hashTable.empty?
+                disciplina=Disciplina.where(hashTable)
+                if disciplina.empty?
+                    printf("Não foram encontrados valores validos\n")
+                end
+                disciplina.destroy_all
+            end
+        when "codigos"
+            if !hashTable.empty?
+                codigo=Codigo.where(hashTable)
+                if codigo.empty?
+                    printf("Não foram encontrados valores validos\n")
+                end
+                codigo.destroy_all
+            end
+        when "alunos"
+            if !hashTable.empty?
+                aluno=Aluno.where(hashTable)
+                if aluno.empty?
+                    printf("Não foram encontrados valores validos\n")
+                end
+                aluno.destroy_all
+            end
+        when "estados"
+            if !hashTable.empty?
+                estado=Estado.where(hashTable)
+                if estado.empty?
+                    printf("Não foram encontrados valores validos\n")
+                end
+                estado.each do |t|
+                    t.alunos.each(&:destroy)
+                end
                 estado.destroy_all
+            end
         when "matriculas"
-            matricula=Matricula.where(hashTable)
-            matricula.destroy_all
+            if !hashTable.empty?
+                matricula=Matricula.where(hashTable)
+                if matricula.empty?
+                    printf("Não foram encontrados valores validos\n")
+                end
+                matricula.destroy_all
+            else
+                printf("Dado não encontrado")
+            end
+
         when "alunos_departamentos"
-            alDp=AlunosDepartamento.where(hashTable)
-            alDp.destroy_all
+            if !hashTable.empty?
+                alDp=AlunosDepartamento.where(hashTable)
+                if alDp.empty?
+                    printf("Não foram encontrados valores validos\n")
+                end
+                alDp.destroy_all
+            end
         end
     end
 end

@@ -22,24 +22,52 @@ def alteraTupla()
     case tabela
     when "departamentos"
         departamento=Departamento.find_by(hashTableAtual)
-        departamento.update(hashTableNova)
+        if(departamento!=nil)
+            departamento.update(hashTableNova)
+        else
+            printf("departamento não encontrado\n")
+        end
     when "disciplinas"
         disciplina=Disciplina.find_by(hashTableAtual)
-        disciplina.update(hashTableNova)
+        if(disciplina!=nil)
+            disciplina.update(hashTableNova)
+        else
+            printf("disciplina não encontrado\n")
+        end
     when "codigos"
         codigo=Codigo.find_by(hashTableAtual)
-        codigo.update(hashTableNova)
+        if(codigo!=nil)
+            codigo.update(hashTableNova)
+        else
+            printf("codigo não encontrado\n")
+        end
     when "alunos"
         aluno=Aluno.find_by(hashTableAtual)
-        aluno.update(hashTableNova)
+        if(aluno!=nil)
+            aluno.update(hashTableNova)
+        else
+            printf("aluno não encontrado\n")
+        end
     when "estados"
         estado=Estado.find_by(hashTableAtual)
-        estado.update(hashTableNova)
+        if(estado!=nil)
+            estado.update(hashTableNova)
+        else
+            printf("estado não encontrado\n")
+        end
     when "matriculas"
         matricula=Matricula.find_by(hashTableAtual)
-        matricula.update(hashTableNova)
+        if(matricula!=nil)
+            matricula.update(hashTableNova)
+        else
+            printf("matricula não encontrada\n")
+        end
     when "alunos_departamentos"
         alDp=AlunosDepartamento.find_by(hashTableAtual)
-        alDp.update(hashTableNova)
+        if(alDp!=nil)
+            alDp.update(hashTableNova)
+        else
+            printf("aluno ou departamento não encontrado\n")
+        end
     end
 end

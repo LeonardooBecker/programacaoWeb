@@ -19,7 +19,9 @@ ActiveRecord::Base.establish_connection:adapter=>"sqlite3",
 
 def insereTupla()
     tabela=ARGV[1]
-    hashTable=hashTableInsercao()
+    if(tabela!="alunos_departamentos")
+        hashTable=hashTableInsercao()
+    end
     case tabela
     when "departamentos"
         departamento=Departamento.new(hashTable)
