@@ -60,10 +60,10 @@ def retornaInfo(tabela,valor)
     end
 end
 
-def hashTableInsercao()
+def hashTableInsercao(entrada)
     hashTable={}
-    for i in 2..(ARGV.length-1)
-        infos=ARGV[i].split('=',2)       
+    for i in 2..(entrada.length-1)
+        infos=entrada[i].split('=',2)       
         ehTabela=verificaParametro(infos[0])
         if(ehTabela=="none")
             hashTable[(infos[0])]=infos[1]
@@ -82,12 +82,12 @@ def hashTableInsercao()
     return hashTable
 end
 
-def hashTableAlDp()
+def hashTableAlDp(entrada)
     hashTable={}
     htables=[]
     chaveAnt=""
-    for i in 2..(ARGV.length-1)
-        infos=ARGV[i].split('=',2)            
+    for i in 2..(entrada.length-1)
+        infos=entrada[i].split('=',2)            
         ehTabela=verificaParametro(infos[0])
         if(ehTabela=="none")
             hashTable[(infos[0])]=infos[1]
@@ -116,11 +116,11 @@ def hashTableAlDp()
     return htables
 end
 
-def hashTableExclusao()
+def hashTableExclusao(entrada)
     htables=[]
     hashTable={}
-    for i in 2..(ARGV.length-1)
-        infos=ARGV[i].split('=',2)            
+    for i in 2..(entrada.length-1)
+        infos=entrada[i].split('=',2)            
         ehTabela=verificaParametro(infos[0])
         if(ehTabela=="none")
             hashTable[(infos[0])]=infos[1]
@@ -146,11 +146,11 @@ def hashTableExclusao()
     return htables
 end
 
-def hashTableAlteracao()
+def hashTableAlteracao(entrada)
     hashTableAtual={}
     hashTableNova={}
-    for i in 2..(ARGV.length-1)
-        infos=ARGV[i].split('=',2)  
+    for i in 2..(entrada.length-1)
+        infos=entrada[i].split('=',2)  
         if(i%2 == 0)          
             ehTabela=verificaParametro(infos[0])
             if(ehTabela=="none")

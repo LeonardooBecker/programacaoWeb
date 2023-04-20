@@ -16,8 +16,8 @@ ActiveRecord::Base.establish_connection:adapter=>"sqlite3",
 
 
 
-def listaTabela()
-    tabela=ARGV[1]
+def listaTabela(entrada)
+    tabela=entrada[1]
     case tabela
     when "departamentos"
         printf("Tabela departamentos\n")
@@ -40,5 +40,8 @@ def listaTabela()
     when "alunos_departamentos"
         printf("Tabela alunos_departamentos\n")
         imprimeAlunosDepartamento(tabela)
+    else
+        printf("Tabela inexistente \n")
     end
+    printf("\n")
 end

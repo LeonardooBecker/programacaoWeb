@@ -14,9 +14,9 @@ ActiveRecord::Base.establish_connection:adapter=>"sqlite3",
                                         :database=>"Tabelas.sqlite3"
 
 
-def alteraTupla()
-    tabela=ARGV[1]
-    hashTables=hashTableAlteracao()
+def alteraTupla(entrada)
+    tabela=entrada[1]
+    hashTables=hashTableAlteracao(entrada)
     hashTableAtual=hashTables[0]
     hashTableNova=hashTables[1]
     case tabela
@@ -69,5 +69,7 @@ def alteraTupla()
         else
             printf("aluno ou departamento não encontrado\n")
         end
+    else
+        printf("Tabela inexistente\n")
     end
 end

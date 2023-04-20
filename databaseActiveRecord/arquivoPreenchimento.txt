@@ -1,0 +1,118 @@
+insere estados nome="Parana" sigla="PR"
+insere estados nome="Belo Horizonte" sigla="BH"
+insere estados nome="Santa Catarina" sigla="SC"
+insere estados nome="Sao Paulo" sigla="SP"
+insere estados nome="Rio de Janeiro" sigla="RJ"
+insere estados nome="Rio Grande do Sul" sigla="RS"
+insere estados nome="Acre" sigla="AC"
+insere estados nome="Alagoas" sigla="AL"
+insere estados nome="Espirito Santo" sigla="ES"
+insere estados nome="Roraima" sigla="RR"
+
+insere departamentos nome="Ciencias Agrarias" campus="Agrarias"
+insere departamentos nome="Ciencias Biologicas" campus="Botanico"
+insere departamentos nome="Ciencias da Terra" campus="Politecnico"
+insere departamentos nome="Ciencias Exatas" campus="Politecnico"
+insere departamentos nome="Ciencias Humanas" campus="Centro"
+insere departamentos nome="Ciencias Juridicas" campus="Centro"
+insere departamentos nome="Ciencias Educacao" campus="Reboucas"
+insere departamentos nome="Ciencias Tecnologicas" campus="Politecnico"
+
+insere disciplinas nome="Agronomia" professor="Cesar" departamento_id="campus='Agrarias'"
+insere disciplinas nome="Biologia" professor="Roberto" departamento_id="nome='Ciencias Biologicas'"
+insere disciplinas nome="Geologia" professor="Marcela" departamento_id="nome='Ciencias da Terra'"
+insere disciplinas nome="Automacao" professor="Fernando" departamento_id="campus='Politecnico'"
+insere disciplinas nome="Direito" professor="Marcelo" departamento_id="nome='Ciencias Juridicas'"
+insere disciplinas nome="Pedagogia" professor="Juliana" departamento_id="campus='Reboucas'"
+insere disciplinas nome="Programacao" professor="Gabriela" departamento_id="nome='Ciencias Tecnologicas'"
+insere disciplinas nome="Psicologia" professor="Kant" departamento_id="nome='Ciencias Humanas'"
+
+insere codigos codigo="AG1062" disciplina_id="nome='Agronomia'"
+insere codigos codigo="BL1556" disciplina_id="nome='Biologia'"
+insere codigos codigo="GG1046" disciplina_id="nome='Geologia'"
+insere codigos codigo="AT3618" disciplina_id="nome='Automacao'"
+insere codigos codigo="DP1456" disciplina_id="professor='Marcelo'"
+insere codigos codigo="PG1069" disciplina_id="nome='Pedagogia'"
+insere codigos codigo="CI1047" disciplina_id="professor='Gabriela"
+insere codigos codigo="PS1749" disciplina_id="nome='Psicologia'"
+
+insere alunos nome="Lara" sobrenome="Vieira" estado_id="sigla='PR'"
+insere alunos nome="Gabriel" sobrenome="Oliveira" estado_id="nome='Acre'"
+insere alunos nome="Marina" sobrenome="Santos" estado_id="nome='Santa Catarina'"
+insere alunos nome="Henrique" sobrenome="Silva" estado_id="sigla='AC'"
+insere alunos nome="Julia" sobrenome="Rodrigues" estado_id="sigla='RS'"
+insere alunos nome="Lucas" sobrenome="Oliveira" estado_id="sigla='AC'"
+insere alunos nome="Isabela" sobrenome="Fernandes" estado_id="nome='Roraima'"
+insere alunos nome="Gabriel" sobrenome="Costa" estado_id="sigla='PR'"
+insere alunos nome="Gabriel" sobrenome="Almeida" estado_id="nome='Parana'"
+insere alunos nome="Ana" sobrenome="Souza" estado_id="sigla='RJ'"
+
+insere matriculas ano=2021 complemento=1569 aluno_id="nome='Lara'"
+insere matriculas ano=2019 complemento=1046 aluno_id="nome='Gabriel'"
+insere matriculas ano=2021 complemento=1506 aluno_id="nome='Marina'"
+insere matriculas ano=2021 complemento=1798 aluno_id="nome='Henrique'"
+insere matriculas ano=2020 complemento=1089 aluno_id="nome='Julia'"
+insere matriculas ano=2018 complemento=1079 aluno_id="nome='Lucas'"
+insere matriculas ano=2021 complemento=1963 aluno_id="nome='Isabela'"
+insere matriculas ano=2020 complemento=1367 aluno_id="sobrenome='Costa'"
+insere matriculas ano=2020 complemento=1212 aluno_id="sobrenome='Almeida'"
+insere matriculas ano=2021 complemento=1741 aluno_id="nome='Ana'"
+
+insere alunos_departamentos aluno_id="nome='Lara'" departamento_id="campus='Centro'"
+insere alunos_departamentos aluno_id="nome='Lara'" departamento_id="campus='Reboucas'"
+insere alunos_departamentos aluno_id="nome='Henrique'" departamento_id="nome='Ciencias Tecnologicas'"
+insere alunos_departamentos aluno_id="sobrenome='Costa'" departamento_id="campus='Botanico'"
+insere alunos_departamentos aluno_id="nome='Marina'" departamento_id="campus='Centro'"
+insere alunos_departamentos aluno_id="nome='Gabriel'" departamento_id="nome='Ciencias da Terra'"
+insere alunos_departamentos aluno_id="nome='Lucas'" departamento_id="nome='Ciencias Exatas'"
+insere alunos_departamentos aluno_id="nome='Julia'" departamento_id="nome='Ciencias Educacao'"
+insere alunos_departamentos aluno_id="nome='Lara'" departamento_id="nome='Ciencias Biologicas'"
+insere alunos_departamentos aluno_id="sobrenome='Almeida'" departamento_id="campus='Agrarias'"
+
+lista alunos_departamentos
+lista departamentos
+lista disciplinas
+lista codigos
+lista alunos
+lista estados
+lista matriculas
+
+exclui alunos_departamentos aluno_id="nome='Lara'"
+exclui alunos_departamentos departamento_id="nome='Ciencias da Terra'"
+altera alunos_departamentos aluno_id="nome='Gabriel' sobrenome='Costa'" aluno_id="nome='Marina'"
+
+exclui departamentos nome="Ciencias Humanas"
+exclui departamentos campus="Agrarias"
+altera departamentos nome="Ciencias Educacao" nome="Ciencias Educacionais"
+
+exclui disciplinas nome="Automacao"
+exclui disciplinas professor="Roberto"
+exclui disciplinas departamento_id="campus='Centro'"
+altera disciplinas departamento_id="nome='Ciencias Tecnologicas'" departamento_id="nome='Ciencias Educacionais'"
+
+exclui codigos codigo="GG1046"
+exclui codigos disciplina_id="nome='Pedagogia'"
+altera codigos codigo="CI1047" codigo="PG1566"
+
+exclui estados nome="Acre"
+exclui estados sigla="AL"
+altera estados nome="Rio Grande do Sul" nome="Bahia" sigla="RS" sigla="BA"
+
+exclui alunos nome="Julia"
+exclui alunos sobrenome="Almeida"
+exclui alunos estado_id="nome='Rio de Janeiro'"
+altera alunos estado_id="nome='Roraima'" estado_id="sigla='SP'"
+
+exclui matriculas ano=2020
+exclui matriculas complemento=1963
+exclui matriculas aluno_id="nome='Lara'"
+altera matriculas complemento=1506 complemento=1823
+
+
+lista alunos_departamentos
+lista departamentos
+lista disciplinas
+lista codigos
+lista alunos
+lista estados
+lista matriculas

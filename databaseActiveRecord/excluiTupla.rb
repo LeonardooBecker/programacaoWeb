@@ -17,9 +17,9 @@ ActiveRecord::Base.establish_connection:adapter=>"sqlite3",
 
 
 
-def excluiTupla()
-    tabela=ARGV[1]
-    hashs=hashTableExclusao()
+def excluiTupla(entrada)
+    tabela=entrada[1]
+    hashs=hashTableExclusao(entrada)
     hashs.each do |hashTable|
         case tabela
         when "departamentos"
@@ -84,6 +84,8 @@ def excluiTupla()
                 end
                 alDp.destroy_all
             end
+        else
+            printf("Tabela inexistente\n")
         end
     end
 end

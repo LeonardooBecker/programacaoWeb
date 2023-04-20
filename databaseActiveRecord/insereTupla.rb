@@ -17,10 +17,10 @@ ActiveRecord::Base.establish_connection:adapter=>"sqlite3",
 
 
 
-def insereTupla()
-    tabela=ARGV[1]
+def insereTupla(entrada)
+    tabela=entrada[1]
     if(tabela!="alunos_departamentos")
-        hashTable=hashTableInsercao()
+        hashTable=hashTableInsercao(entrada)
     end
     case tabela
     when "departamentos"
@@ -42,10 +42,12 @@ def insereTupla()
         matricula=Matricula.new(hashTable)
         matricula.save
     when "alunos_departamentos"
-        hashs=hashTableAlDp()
+        hashs=hashTableAlDp(entrada)
         hashs.each do |hashEncontrada|
             alDp=AlunosDepartamento.new(hashEncontrada)
             alDp.save
         end
+    else
+        printf("Tabela inexistente \n")
     end
 end
