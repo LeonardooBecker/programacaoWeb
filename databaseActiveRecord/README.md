@@ -53,13 +53,13 @@ _Do qual:_ Todas as tabelas disponíveis serão criadas automaticamente
 ~~~ruby
 ruby menu.rb
 ~~~
-_Com esse chamado, o programa entra em modo de execução, permitindo usar os Comandos disponíveis para interação com o banco de dados_
+_Com essa chamada, o programa entra em modo de execução, permitindo usar os Comandos disponíveis para interação com o banco de dados_
 
 ### Para inserção automática de valores
 ~~~ruby
 ruby menu.rb 1
 ~~~
-_Chamando dessa maneira, o banco de dados é preenchido com os comandos existentes em "arquivoPreenchimento.txt"_
+_Executando dessa maneira, o banco de dados é preenchido com os comandos existentes em "arquivoPreenchimento.txt"_
 
 
 ## Comandos
@@ -79,7 +79,7 @@ insere alunos nome="Leonardo" sobrenome="Becker" estado_id="nome='Parana'"
 ~~~bash
 exclui alunos nome="Leonardo" estado_id="sigla='PR'"
 ~~~
-*Não é necessário a existência de todos os valores para realizar a exclusão de um elemento, mas em casos de atributos com valores repetidos, são os outros atributos passados na linha de comando que especificam a tupla correta a ser excluída.*
+*Não é necessário a existência de todos os atributos e valores para realizar a exclusão de um elemento, mas em casos de atributos com valores repetidos, são as outras propriedades passadas na linha de comando que especificam a tupla correta a ser excluída.*
 
 * **altera** : Altera os valores da tabela. Importante passar os valores já existentes e os novos desejados,para o correto funcionamento.
 ~~~bash
