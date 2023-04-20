@@ -1,2 +1,0 @@
-sudo gem install activerecord
-sudo gem install sqlite3

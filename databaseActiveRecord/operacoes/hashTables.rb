@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-$:.push './'
+$:.push './../'
 require 'active_record'
-require 'aluno.rb'
-require 'codigo.rb'
-require 'alunoDepartamentos.rb'
-require 'departamento.rb'
-require 'disciplina.rb'
-require 'estado.rb'
-require 'matricula.rb'
+require 'defineTabelas/aluno.rb'
+require 'defineTabelas/codigo.rb'
+require 'defineTabelas/alunoDepartamentos.rb'
+require 'defineTabelas/departamento.rb'
+require 'defineTabelas/disciplina.rb'
+require 'defineTabelas/estado.rb'
+require 'defineTabelas/matricula.rb'
 
 ActiveRecord::Base.establish_connection:adapter=>"sqlite3",
                                         :database=>"Tabelas.sqlite3"

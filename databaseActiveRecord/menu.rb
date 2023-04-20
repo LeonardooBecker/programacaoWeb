@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 $:.push './'
 require 'active_record'
-require 'insereTupla.rb'
-require 'excluiTupla.rb'
-require 'alteraTupla.rb'
-require 'listaTabela.rb'
-require 'verificaEntrada.rb'
+require 'operacoes/insereTupla.rb'
+require 'operacoes/excluiTupla.rb'
+require 'operacoes/alteraTupla.rb'
+require 'operacoes/listaTabela.rb'
+require 'operacoes/verificaEntrada.rb'
 
 ActiveRecord::Base.establish_connection:adapter=>"sqlite3",
                                         :database=>"Tabelas.sqlite3"
@@ -21,6 +21,7 @@ ARGV.clear
 
 
 while ((option!="q") && (leArquivo==0))
+    printf("Insira um comando: ( Para encerrar insira 'q' )\n")
     entrada=gets.chomp
     entrada=corrigeEntrada(entrada)
     option=entrada[0]

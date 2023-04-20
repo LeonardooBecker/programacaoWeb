@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-$:.push './'
+$:.push './../'
 require 'active_record'
-require 'insereTupla.rb'
-require 'excluiTupla.rb'
-require 'alteraTupla.rb'
-require 'listaTabela.rb'
+require 'operacoes/insereTupla.rb'
+require 'operacoes/excluiTupla.rb'
+require 'operacoes/alteraTupla.rb'
+require 'operacoes/listaTabela.rb'
 
 ActiveRecord::Base.establish_connection:adapter=>"sqlite3",
                                         :database=>"Tabelas.sqlite3"

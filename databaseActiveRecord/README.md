@@ -28,7 +28,7 @@
 * Uma disciplina so possui 1 código, assim como 1 código só esta associado a uma disciplina.
 * Cada aluno so possui 1 matrícula, assim como 1 matrícula so esta associada a um aluno.     
 
-![](./diagram.png)
+![](./iamges/diagram.png)
 
 ## Criar database
 

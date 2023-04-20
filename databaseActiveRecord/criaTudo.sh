@@ -1,39 +1,22 @@
 rm -f Tabelas.sqlite3
 echo -n "criaEstados ..."
-ruby criaEstados.rb 
+ruby criaTabelas/criaEstados.rb 
 echo "Ok"
 echo -n "criaAlunoDepartamento ..."
-ruby criaAlunoDepartamento.rb
+ruby criaTabelas/criaAlunoDepartamento.rb
 echo "Ok"
 echo -n "criaAlunos ..."
-ruby criaAlunos.rb
+ruby criaTabelas/criaAlunos.rb
 echo "Ok"
 echo -n "criaCodigos ..."
-ruby criaCodigos.rb 
+ruby criaTabelas/criaCodigos.rb 
 echo "Ok"
 echo -n "criaDepartamentos ..."
-ruby criaDepartamentos.rb 
+ruby criaTabelas/criaDepartamentos.rb 
 echo "Ok"
 echo -n "criaDisciplinas ..."
-ruby criaDisciplinas.rb 
+ruby criaTabelas/criaDisciplinas.rb 
 echo "Ok"
 echo -n "criaMatriculas ..."
-ruby criaMatriculas.rb 
+ruby criaTabelas/criaMatriculas.rb 
 echo "Ok"
-
-
-# echo -n "populaEstados ..."
-# ruby populaEstados.rb
-# echo "Ok"
-# echo -n "populaPessoas ..."
-# ruby populaPessoasD.rb
-# echo "Ok"
-# echo -n "populaMunicipios ..."
-# ruby populaMunicipos.rb
-# echo "Ok"
-# echo -n "populaEsportes ..."
-# ruby populaEsportes.rb
-# echo "Ok"
-# echo -n "populaPessoasEsportes ..."
-# ruby populaPessoaEsporte.rb
-# echo "Ok"
