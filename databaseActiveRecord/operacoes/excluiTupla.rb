@@ -26,63 +26,67 @@ def excluiTupla(entrada)
             if !hashTable.empty?
                 departamento=Departamento.where(hashTable)
                 if departamento.empty?
-                    printf("Não foram encontrados valores validos\n")
+                    printf("Não foram encontrados valores validos - Departamentos\n")
                 end
                 departamento.destroy_all
+                return
             end
         when "disciplinas"
             if !hashTable.empty?
                 disciplina=Disciplina.where(hashTable)
                 if disciplina.empty?
-                    printf("Não foram encontrados valores validos\n")
+                    printf("Não foram encontrados valores validos - Disciplinas \n")
                 end
                 disciplina.destroy_all
+                return
             end
         when "codigos"
             if !hashTable.empty?
                 codigo=Codigo.where(hashTable)
                 if codigo.empty?
-                    printf("Não foram encontrados valores validos\n")
+                    printf("Não foram encontrados valores validos - Codigos\n")
                 end
                 codigo.destroy_all
+                return
             end
         when "alunos"
             if !hashTable.empty?
                 aluno=Aluno.where(hashTable)
                 if aluno.empty?
-                    printf("Não foram encontrados valores validos\n")
+                    printf("Não foram encontrados valores validos - Alunos\n")
                 end
                 aluno.destroy_all
+                return
             end
         when "estados"
             if !hashTable.empty?
                 estado=Estado.where(hashTable)
                 if estado.empty?
-                    printf("Não foram encontrados valores validos\n")
+                    printf("Não foram encontrados valores validos - Estados \n")
                 end
                 estado.each do |t|
                     t.alunos.each(&:destroy)
                 end
                 estado.destroy_all
+                return
             end
         when "matriculas"
             if !hashTable.empty?
                 matricula=Matricula.where(hashTable)
                 if matricula.empty?
-                    printf("Não foram encontrados valores validos\n")
+                    printf("Não foram encontrados valores validos - Matriculas \n")
                 end
                 matricula.destroy_all
-            else
-                printf("Dado não encontrado")
+                return
             end
-
         when "alunos_departamentos"
             if !hashTable.empty?
                 alDp=AlunosDepartamento.where(hashTable)
                 if alDp.empty?
-                    printf("Não foram encontrados valores validos\n")
+                    printf("Não foram encontrados valores validos - AlunosDepartamentos\n")
                 end
                 alDp.destroy_all
+                return
             end
         else
             printf("Tabela inexistente\n")

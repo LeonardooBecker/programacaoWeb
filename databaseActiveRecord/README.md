@@ -1,4 +1,4 @@
-# Trabalho 2 - Banco de Dados usando ActiveRecord
+# Trabalho 2 - Banco de Dados ActiveRecord
 
 ## Estruturas
 
