@@ -5,7 +5,7 @@
 ### Tabelas
 
 * **departamentos** (nome, campus)
-* **estado** (nome, sigla)
+* **estados** (nome, sigla)
 * **alunos** (nome, sobrenome, *estado_id*)
 * **alunos_departamentos** (*aluno_id*, *departamento_id*)
 * **matriculas** (ano, complemento, *aluno_id*)
@@ -35,7 +35,7 @@
 ### Forma manual:
 
 ~~~ruby
-ruby cria"Tabela".rb
+ruby criaTabelas/cria"Tabela".rb
 ~~~
 _Do qual:_ "Tabela" é substituído pela tabela que deseja ser criado.
 
@@ -53,7 +53,7 @@ _Do qual:_ Todas as tabelas disponíveis serão criadas automaticamente
 ~~~ruby
 ruby menu.rb
 ~~~
-_Com esse chamado, o programa entra em modo de execução permitindo usar os Comandos para interação com o bando de dados_
+_Com esse chamado, o programa entra em modo de execução, permitindo usar os Comandos disponíveis para interação com o banco de dados_
 
 ### Para inserção automática de valores
 ~~~ruby
@@ -71,18 +71,21 @@ Os comandos seguem uma formatação semelhante:
 ### Operação
 * **insere** : Insere valores na tabela com os atributos e valores passados.
 ~~~bash
-insere alunos nome="Leonardo"
+insere alunos nome="Leonardo" sobrenome="Becker" estado_id="nome='Parana'"
 ~~~
 *Para casos em que a tabela possua chave estrangeira, o novo elemento so será inserido caso haja um atributo e valor válido referente a chave estrangeira.*  
 
 * **exclui** : Exclui valores da tabela de acordo com os atributos e valores passados.
 ~~~bash
-exclui alunos nome="Leonardo"
+exclui alunos nome="Leonardo" estado_id="sigla='PR'"
 ~~~
+*Não é necessário a existência de todos os valores para realizar a exclusão de um elemento, mas em casos de atributos com valores repetidos, são os outros atributos passados na linha de comando que especificam a tupla correta a ser excluída.*
+
 * **altera** : Altera os valores da tabela. Importante passar os valores já existentes e os novos desejados,para o correto funcionamento.
 ~~~bash
 altera alunos nome="Leonardo" nome="João"
 ~~~ 
+*Não é necessário mais que uma dupla de atributo composta por valor atual e novo valor para realizar a alteração de um elemento, mas em casos de atributos com valores repetidos, são os outras propriedades passadas na linha de comando que especificam a tupla correta a ser alterada.*   
 * **lista** : Lista a tabela informada, nesse comando não são necessários atributos e valores.
 ~~~bash
 lista alunos
