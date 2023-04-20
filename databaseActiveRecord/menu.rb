@@ -19,6 +19,20 @@ if (ARGV[0]=="1")
 end
 ARGV.clear
 
+printf("Banco de dados utilizando active record.\n")
+printf("Operações disponíveis: 
+    'insere', 
+    'exclui', 
+    'lista', 
+    'altera'.\n\n")
+printf("Tabelas existentes: 
+    'alunos_departamentos', 
+    'departamentos', 
+    'alunos', 
+    'estados', 
+    'disciplinas', 
+    'codigos', 
+    'matriculas'.\n\n")
 
 while ((option!="q") && (leArquivo==0))
     printf("Insira um comando: ( Para encerrar insira 'q' )\n")

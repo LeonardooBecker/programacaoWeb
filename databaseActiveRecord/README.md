@@ -28,7 +28,7 @@
 * Uma disciplina so possui 1 código, assim como 1 código só esta associado a uma disciplina.
 * Cada aluno so possui 1 matrícula, assim como 1 matrícula so esta associada a um aluno.     
 
-![](./iamges/diagram.png)
+![](./images/diagram.png)
 
 ## Criar database
 
@@ -73,6 +73,8 @@ Os comandos seguem uma formatação semelhante:
 ~~~bash
 insere alunos nome="Leonardo"
 ~~~
+*Para casos em que a tabela possua chave estrangeira, o novo elemento so será inserido caso haja um atributo e valor válido referente a chave estrangeira.*  
+
 * **exclui** : Exclui valores da tabela de acordo com os atributos e valores passados.
 ~~~bash
 exclui alunos nome="Leonardo"
