@@ -5,33 +5,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
     <title>Document</title>
 </head>
 
 <body>
     <h1>Tisstulo</h1>
-    <canvas id="myCanvas">
-        Your browser does not support the canvas tag.
+    <canvas id="myCanvas" height="800px" width="800px">
     </canvas>
-
-    <script>
-        const canvas = document.getElementById("myCanvas");
-        const ctx = canvas.getContext("2d");
-
-        reta=[20,50]
-
-        ctx.beginPath();
-        ctx.moveTo(reta[0], reta[0]);
-
-        ctx.lineTo(reta[1], reta[1]);
-
-        ctx.strokeStyle = "red";
-        ctx.lineWidth = 3;
-
-        ctx.stroke();
-
-    </script>
-
+    <script src="./polygon.js"></script>
 </body>
 
 </html>
