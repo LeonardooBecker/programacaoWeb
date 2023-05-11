@@ -117,6 +117,38 @@ for (i = 0; i < (allRetas.length); i++) {
 }
 
 
+function moveCentral(centrais,indiceCentral) {
+    if (indiceCentral > 0)
+        pontoCentral = centrais[(indiceCentral - 1)]
+    else
+        pontoCentral = centrais[(centrais.length - 1)]
+
+    if ((pontoCentral.retaPertencente.x2) > (pontoCentral.retaPertencente.x1))
+        pontoCentral.x = ((pontoCentral.retaPertencente.x2 - pontoCentral.retaPertencente.x1) / 2 + pontoCentral.retaPertencente.x1);
+    else
+        pontoCentral.x = ((pontoCentral.retaPertencente.x1 - pontoCentral.retaPertencente.x2) / 2 + pontoCentral.retaPertencente.x2);
+    if ((pontoCentral.retaPertencente.y2) > (pontoCentral.retaPertencente.y1))
+        pontoCentral.y = ((pontoCentral.retaPertencente.y2 - pontoCentral.retaPertencente.y1) / 2 + pontoCentral.retaPertencente.y1);
+    else
+        pontoCentral.y = ((pontoCentral.retaPertencente.y1 - pontoCentral.retaPertencente.y2) / 2 + pontoCentral.retaPertencente.y2);
+
+
+    if (indiceCentral < (centrais.length - 1))
+        pontoCentral = centrais[(indiceCentral + 1)]
+    else
+        pontoCentral = centrais[0]
+
+    if ((pontoCentral.retaPertencente.x2) > (pontoCentral.retaPertencente.x1))
+        pontoCentral.x = ((pontoCentral.retaPertencente.x2 - pontoCentral.retaPertencente.x1) / 2 + pontoCentral.retaPertencente.x1);
+    else
+        pontoCentral.x = ((pontoCentral.retaPertencente.x1 - pontoCentral.retaPertencente.x2) / 2 + pontoCentral.retaPertencente.x2);
+    if ((pontoCentral.retaPertencente.y2) > (pontoCentral.retaPertencente.y1))
+        pontoCentral.y = ((pontoCentral.retaPertencente.y2 - pontoCentral.retaPertencente.y1) / 2 + pontoCentral.retaPertencente.y1);
+    else
+        pontoCentral.y = ((pontoCentral.retaPertencente.y1 - pontoCentral.retaPertencente.y2) / 2 + pontoCentral.retaPertencente.y2);
+
+}
+
 
 function moveLine(event, allCircles, indiceCircle) {
     const x = event.clientX - canvas.offsetLeft;
@@ -129,17 +161,20 @@ function moveLine(event, allCircles, indiceCircle) {
             reta1 = (allCircles[i]).reta1;
             reta1.x1 = x;
             reta1.y1 = y;
-
+            
             reta2 = (allCircles[i]).reta2;
             reta2.x2 = x;
             reta2.y2 = y;
-
+            
             allCircles[i].x = x;
             allCircles[i].y = y;
+            moveCentral(centrais,i);
+            moveCentral(centrais,i-1);
         }
 
     }
 }
+
 
 function move(andouX, andouY, allCircles, indice) {
 
@@ -154,7 +189,9 @@ function move(andouX, andouY, allCircles, indice) {
     reta2.x2 = allCircles[indice].x;
     reta2.y2 = allCircles[indice].y;
 
+    moveCentral(centrais,indiceCentral);
 }
+
 
 
 function moveDual(event, centrais, indiceCentral) {
@@ -169,37 +206,6 @@ function moveDual(event, centrais, indiceCentral) {
 
     centrais[indiceCentral].x = x;
     centrais[indiceCentral].y = y;
-
-    if(indiceCentral>0)
-        pontoCentral = centrais[(indiceCentral - 1)]
-    else
-        pontoCentral = centrais[(centrais.length-1)]
-
-    if ((pontoCentral.retaPertencente.x2) > (pontoCentral.retaPertencente.x1))
-        pontoCentral.x = ((pontoCentral.retaPertencente.x2 - pontoCentral.retaPertencente.x1) / 2 + pontoCentral.retaPertencente.x1);
-    else
-        pontoCentral.x = ((pontoCentral.retaPertencente.x1 - pontoCentral.retaPertencente.x2) / 2 + pontoCentral.retaPertencente.x2);
-    if ((pontoCentral.retaPertencente.y2) > (pontoCentral.retaPertencente.y1))
-        pontoCentral.y = ((pontoCentral.retaPertencente.y2 - pontoCentral.retaPertencente.y1) / 2 + pontoCentral.retaPertencente.y1);
-    else
-        pontoCentral.y = ((pontoCentral.retaPertencente.y1 - pontoCentral.retaPertencente.y2) / 2 + pontoCentral.retaPertencente.y2);
-
-    
-    if(indiceCentral<(centrais.length-1))
-        pontoCentral = centrais[(indiceCentral + 1)]
-    else
-        pontoCentral = centrais[0]
-
-    if ((pontoCentral.retaPertencente.x2) > (pontoCentral.retaPertencente.x1))
-        pontoCentral.x = ((pontoCentral.retaPertencente.x2 - pontoCentral.retaPertencente.x1) / 2 + pontoCentral.retaPertencente.x1);
-    else
-        pontoCentral.x = ((pontoCentral.retaPertencente.x1 - pontoCentral.retaPertencente.x2) / 2 + pontoCentral.retaPertencente.x2);
-    if ((pontoCentral.retaPertencente.y2) > (pontoCentral.retaPertencente.y1))
-        pontoCentral.y = ((pontoCentral.retaPertencente.y2 - pontoCentral.retaPertencente.y1) / 2 + pontoCentral.retaPertencente.y1);
-    else
-        pontoCentral.y = ((pontoCentral.retaPertencente.y1 - pontoCentral.retaPertencente.y2) / 2 + pontoCentral.retaPertencente.y2);
-
-
 
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
