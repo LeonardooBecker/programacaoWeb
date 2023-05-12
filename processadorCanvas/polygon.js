@@ -1,15 +1,50 @@
 var canvas = document.getElementById("myCanvas");
 ctx = canvas.getContext("2d");
 
-allRetas = []
-
-lados = 6
+lados = 2
 inicio = 0
 
-ctx.beginPath();
-ctx.arc(canvas.width / 2, canvas.height / 2, 20, 0, Math.PI * 2, true);
-ctx.strokeStyle = "green";
-ctx.stroke();
+function insereRetas(allRetas, x1, y1, x2, y2, posicao) {
+    reta = {}
+    reta.x1 = x1;
+    reta.y1 = y1;
+    reta.x2 = x2;
+    reta.y2 = y2;
+    allRetas.splice(posicao, 0, reta);
+}
+
+function insereCirculo(allCircles, x, y, allRetas, posicao) {
+    point = {}
+    point.x = x;
+    point.y = y;
+    point.reta = allRetas[(posicao - 1)];
+    allCircles.splice(posicao, 0, point);
+}
+
+function retornaCentro(reta) {
+    point = {}
+    if (reta.x1 > reta.x2) {
+        point.x = (reta.x1 - reta.x2) / 2 + reta.x2;
+    }
+    else
+        point.x = (reta.x2 - reta.x1) / 2 + reta.x1;
+    if (reta.y1 > reta.y2) {
+        point.y = (reta.y1 - reta.y2) / 2 + reta.y2;
+    }
+    else
+        point.y = (reta.y2 - reta.y1) / 2 + reta.y1;
+    return point;
+}
+
+function insereCentro(allCentros, allRetas, posicao) {
+    point = {}
+    point = retornaCentro(allRetas[posicao])
+    allCentros.splice(posicao, 0, point);
+}
+
+allRetas = []
+allCircles = []
+allCentros = []
 
 while (1) {
     passo = ((Math.PI * 2) / lados);
@@ -19,34 +54,19 @@ while (1) {
     sen2 = (Math.round(Math.sin(inicio + passo) * raio));
     cos2 = (Math.round(Math.cos(inicio + passo) * raio));
 
-    reta = {}
-    reta.x1 = canvas.width / 2 + sen1;
-    reta.y1 = canvas.height / 2 + cos1;
-    reta.x2 = canvas.width / 2 + sen2;
-    reta.y2 = canvas.height / 2 + cos2;
-    allRetas.push(reta)
+    x1 = canvas.width / 2 + sen1;
+    y1 = canvas.height / 2 + cos1;
+    x2 = canvas.width / 2 + sen2;
+    y2 = canvas.height / 2 + cos2;
 
+    insereRetas(allRetas, x1, y1, x2, y2, (allRetas.length));
+    insereCirculo(allCircles, x1, y1, allRetas, (allCircles.length));
+    insereCentro(allCentros, allRetas, (allCentros.length));
     inicio += passo;
     if (inicio > (Math.PI * 2 - 0.3))
         break;
-}
 
-allCircles = []
-for (i = 0; i < (allRetas.length); i++) {
-    point = {}
-    point.x = allRetas[i].x1;
-    point.y = allRetas[i].y1;
-    if (i != 0) {
-        point.reta1 = allRetas[i]
-        point.reta2 = allRetas[(i - 1)]
-    }
-    else {
-        point.reta1 = allRetas[i]
-        point.reta2 = allRetas[(allRetas.length - 1)]
-    }
-    allCircles.push(point)
 }
-console.log(allCircles)
 console.log(allRetas);
 
 
@@ -82,156 +102,140 @@ function drawCircle(circulo) {
     ctx.stroke();
 }
 
-centrais = []
-for (i = 0; i < allRetas.length; i++) {
-    point = {}
-    if (allRetas[i].x1 > allRetas[i].x2) {
-        point.x = (allRetas[i].x1 - allRetas[i].x2) / 2 + allRetas[i].x2;
-    }
-    else
-        point.x = (allRetas[i].x2 - allRetas[i].x1) / 2 + allRetas[i].x1;
-    if (allRetas[i].y1 > allRetas[i].y2) {
-        point.y = (allRetas[i].y1 - allRetas[i].y2) / 2 + allRetas[i].y2;
-    }
-    else
-        point.y = (allRetas[i].y2 - allRetas[i].y1) / 2 + allRetas[i].y1;
-    if (i != (allCircles.length - 1)) {
-        point.circle1 = allCircles[i];
-        point.circle2 = allCircles[i + 1];
-    }
-    else {
-        point.circle1 = allCircles[i];
-        point.circle2 = allCircles[0];
-    }
-    point.retaPertencente = allRetas[i];
-    centrais.push(point)
-}
 
-console.log(centrais)
-
-for (i = 0; i < centrais.length; i++)
-    drawCircle(centrais[i]);
+for (i = 0; i < allCentros.length; i++)
+    drawCircle(allCentros[i]);
 for (i = 0; i < (allRetas.length); i++) {
     drawLine(allRetas[i]);
     drawCircle(allCircles[i])
 }
 
 
-function moveCentral(centrais,indiceCentral) {
-    if (indiceCentral > 0)
-        pontoCentral = centrais[(indiceCentral - 1)]
-    else
-        pontoCentral = centrais[(centrais.length - 1)]
-
-    if ((pontoCentral.retaPertencente.x2) > (pontoCentral.retaPertencente.x1))
-        pontoCentral.x = ((pontoCentral.retaPertencente.x2 - pontoCentral.retaPertencente.x1) / 2 + pontoCentral.retaPertencente.x1);
-    else
-        pontoCentral.x = ((pontoCentral.retaPertencente.x1 - pontoCentral.retaPertencente.x2) / 2 + pontoCentral.retaPertencente.x2);
-    if ((pontoCentral.retaPertencente.y2) > (pontoCentral.retaPertencente.y1))
-        pontoCentral.y = ((pontoCentral.retaPertencente.y2 - pontoCentral.retaPertencente.y1) / 2 + pontoCentral.retaPertencente.y1);
-    else
-        pontoCentral.y = ((pontoCentral.retaPertencente.y1 - pontoCentral.retaPertencente.y2) / 2 + pontoCentral.retaPertencente.y2);
-
-
-    if (indiceCentral < (centrais.length - 1))
-        pontoCentral = centrais[(indiceCentral + 1)]
-    else
-        pontoCentral = centrais[0]
-
-    if ((pontoCentral.retaPertencente.x2) > (pontoCentral.retaPertencente.x1))
-        pontoCentral.x = ((pontoCentral.retaPertencente.x2 - pontoCentral.retaPertencente.x1) / 2 + pontoCentral.retaPertencente.x1);
-    else
-        pontoCentral.x = ((pontoCentral.retaPertencente.x1 - pontoCentral.retaPertencente.x2) / 2 + pontoCentral.retaPertencente.x2);
-    if ((pontoCentral.retaPertencente.y2) > (pontoCentral.retaPertencente.y1))
-        pontoCentral.y = ((pontoCentral.retaPertencente.y2 - pontoCentral.retaPertencente.y1) / 2 + pontoCentral.retaPertencente.y1);
-    else
-        pontoCentral.y = ((pontoCentral.retaPertencente.y1 - pontoCentral.retaPertencente.y2) / 2 + pontoCentral.retaPertencente.y2);
-
-}
-
-
 function moveLine(event, allCircles, indiceCircle) {
     const x = event.clientX - canvas.offsetLeft;
     const y = event.clientY - canvas.offsetTop;
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
     for (i = 0; i < allRetas.length; i++) {
-        drawLine(allRetas[i]);
         drawCircle(allCircles[i]);
+        drawLine(allRetas[i])
+        drawCircle(allCentros[i]);
         if (i == indiceCircle) {
-            reta1 = (allCircles[i]).reta1;
-            reta1.x1 = x;
-            reta1.y1 = y;
-            
-            reta2 = (allCircles[i]).reta2;
-            reta2.x2 = x;
-            reta2.y2 = y;
-            
+
             allCircles[i].x = x;
             allCircles[i].y = y;
-            moveCentral(centrais,i);
-            moveCentral(centrais,i-1);
+
+            allRetas[i].x1 = x;
+            allRetas[i].y1 = y;
+
+            allCentros[i] = retornaCentro(allRetas[i])
+
+            indice = i;
+            if (i == 0)
+                indice = (allRetas.length) - 1;
+            else
+                indice = i - 1;
+
+            allRetas[indice].x2 = x;
+            allRetas[indice].y2 = y;
+            allCentros[indice] = retornaCentro(allRetas[indice]);
+
         }
 
     }
 }
 
 
-function move(andouX, andouY, allCircles, indice) {
-
-    allCircles[indice].x += andouX;
-    allCircles[indice].y += andouY;
-
-    reta1 = (allCircles[indice]).reta1;
-    reta1.x1 = allCircles[indice].x;
-    reta1.y1 = allCircles[indice].y;
-
-    reta2 = (allCircles[indice]).reta2;
-    reta2.x2 = allCircles[indice].x;
-    reta2.y2 = allCircles[indice].y;
-
-    moveCentral(centrais,indiceCentral);
-}
-
-
-
-function moveDual(event, centrais, indiceCentral) {
+function moveDual(event, allCentros, indiceCentral) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (i = 0; i < allRetas.length; i++) {
+        drawCircle(allCircles[i]);
+        drawLine(allRetas[i])
+        drawCircle(allCentros[i]);
+    }
     const x = event.clientX - canvas.offsetLeft;
     const y = event.clientY - canvas.offsetTop;
 
-    circ1 = centrais[indiceCentral].circle1;
-    circ2 = centrais[indiceCentral].circle2;
+    andouX = x - allCentros[indiceCentral].x;
+    andouY = y - allCentros[indiceCentral].y;
 
-    andouX = x - centrais[indiceCentral].x;
-    andouY = y - centrais[indiceCentral].y;
+    allCentros[indiceCentral].x = x;
+    allCentros[indiceCentral].y = y;
 
-    centrais[indiceCentral].x = x;
-    centrais[indiceCentral].y = y;
+    allCircles[indiceCentral].x += andouX;
+    allCircles[indiceCentral].y += andouY;
+
+    allRetas[indiceCentral].x1 += andouX;
+    allRetas[indiceCentral].y1 += andouY;
+    allRetas[indiceCentral].x2 += andouX;
+    allRetas[indiceCentral].y2 += andouY;
+
+    indice=indiceCentral;
+    if (indice == 0)
+        indice = (allCircles.length - 1);
+    else
+        indice -= 1;
+
+    allRetas[indice].x2 = allCircles[indiceCentral].x;
+    allRetas[indice].y2 = allCircles[indiceCentral].y;
+    allCentros[indice] = retornaCentro(allRetas[indice]);
+
+    indice = indiceCentral;
+    if (indice == (allCircles.length - 1))
+        indice = 0;
+    else
+        indice += 1;
+
+    allCircles[indice].x += andouX;
+    allCircles[indice].y += andouY;
+    allRetas[indice].x1 = allCircles[indice].x;
+    allRetas[indice].y1 = allCircles[indice].y;
+    allCentros[indice] = retornaCentro(allRetas[indice]);
 
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (i = 0; i < allCircles.length; i++) {
-        drawCircle(allCircles[i]);
-        drawLine(allRetas[i]);
-        drawCircle(centrais[i]);
-        if (allCircles[i] == circ1) {
-            move(andouX, andouY, allCircles, i)
-        }
+    drawCircle(allCentros[indiceCentral])
 
-        if (allCircles[i] == circ2) {
-            move(andouX, andouY, allCircles, i)
-        }
-    }
 }
 
 
+function cortaReta(event, allRetas, indice) {
+    const x = event.clientX - canvas.offsetLeft;
+    const y = event.clientY - canvas.offsetTop;
+    console.log(x, y)
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    allRetas[indice].x2 = x;
+    allRetas[indice].y2 = y;
+    if (indice == (allRetas.length - 1))
+        indice = 0;
+    else
+        indice = indice + 1;
+    insereRetas(allRetas, x, y, allRetas[indice].x1, allRetas[indice].y1, indice);
+    insereCirculo(allCircles, x, y, allRetas, indice);
+    insereCentro(allCentros, allRetas, indice);
+
+    //Correção de centro pós corte
+    if (indice == 0)
+        indice = (allRetas.length - 1)
+    else
+        indice = indice - 1;
+    allCentros[indice] = retornaCentro(allRetas[indice]);
+
+    isMouseDown = false;
+    isRightClick = false;
+}
+
+isRightClick = false;
+
 canvas.addEventListener("mousedown", function (event) {
+    isMouseDown = true;
     const x = event.clientX - canvas.offsetLeft;
     const y = event.clientY - canvas.offsetTop;
     const tolerancia = 9;
 
     for (i = 0; i < allCircles.length; i++) {
-        const DiffXCentral = Math.abs(x - centrais[i].x);
-        const DiffYCentral = Math.abs(y - centrais[i].y);
+        const DiffXCentral = Math.abs(x - allCentros[i].x);
+        const DiffYCentral = Math.abs(y - allCentros[i].y);
         const diffX = Math.abs(x - allCircles[i].x);
         const diffY = Math.abs(y - allCircles[i].y);
 
@@ -250,26 +254,13 @@ canvas.addEventListener("mousedown", function (event) {
         }
         if (DiffXCentral < tolerancia) {
             if (DiffYCentral < tolerancia) {
+                console.log("centro")
                 isMouseDown = true;
                 isCanto = false;
                 isLine = true;
                 indiceCentral = i;
             }
         }
-        // else {
-        //     if (distancia < tolerancia + 8) {
-        //         indices = []
-        //         for (j = 0; j < allCircles.length; j++) {
-        //             if (allCircles[j].reta1 == allRetas[i])
-        //                 indices.push(j)
-        //             if (allCircles[j].reta2 == allRetas[i])
-        //                 indices.push(j)
-        //         }
-        //         isCanto = false;
-        //         isLine = true;
-        //         moveDual(event, allCircles, indices)
-        //     }
-        // }
 
     }
 
@@ -277,7 +268,7 @@ canvas.addEventListener("mousedown", function (event) {
         if (isCanto)
             moveLine(event, allCircles, indiceCircle)
         if (isLine)
-            moveDual(event, centrais, indiceCentral)
+            moveDual(event, allCentros, indiceCentral)
     }
 });
 
@@ -286,7 +277,25 @@ canvas.addEventListener("mousemove", function (e) {
         if (isCanto)
             moveLine(e, allCircles, indiceCircle);
         if (isLine)
-            moveDual(e, centrais, indiceCentral)
+            moveDual(e, allCentros, indiceCentral)
+    }
+});
+
+canvas.addEventListener('contextmenu', function (event) {
+    event.preventDefault();
+    const x = event.clientX - canvas.offsetLeft;
+    const y = event.clientY - canvas.offsetTop;
+    const tolerancia = 9;
+    isRightClick = true;
+    for (i = 0; i < allCircles.length; i++) {
+        param = getEquation(allRetas[i]);
+        const distancia = Math.abs(x * param.slope + param.yIntercept - y);
+        if (distancia < tolerancia) {
+            if (isRightClick) {
+                isRightClick = false;
+                cortaReta(event, allRetas, i);
+            }
+        }
     }
 });
 
@@ -300,6 +309,6 @@ canvas.addEventListener("mouseup", function (e) {
         drawLine(allRetas[i]);
     for (i = 0; i < allCircles.length; i++)
         drawCircle(allCircles[i]);
-    for (i = 0; i < centrais.length; i++)
-        drawCircle(centrais[i]);
+    for (i = 0; i < allCentros.length; i++)
+        drawCircle(allCentros[i]);
 });
