@@ -1,7 +1,7 @@
 var canvas = document.getElementById("myCanvas");
 ctx = canvas.getContext("2d");
 
-lados = 2
+lados = 9
 inicio = 0
 
 tamanhoCCentral = 5;
@@ -83,10 +83,7 @@ else {
     }
 }
 function getEquation(reta) {
-    // Calcula o coeficiente angular (slope) da reta
     const slope = (reta.y2 - reta.y1) / (reta.x2 - reta.x1);
-
-    // Calcula o coeficiente linear (y-intercept) da reta
     const yIntercept = reta.y1 - slope * reta.x1;
 
     return { slope, yIntercept };
@@ -171,8 +168,9 @@ function moveLine(event, allCircles, indiceCircle) {
 
 function moveDual(event, allCentros, indiceCentral) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (i = 0; i < allRetas.length; i++) {
+    for (i = 0; i < allCircles.length; i++)
         drawCircle(allCircles[i], corCCanto, tamanhoCCanto);
+    for (i = 0; i < allRetas.length; i++) {
         drawLine(allRetas[i], corLinha, tamanhoLinha)
         drawCircle(allCentros[i], corCCentral, tamanhoCCentral);
     }
@@ -193,27 +191,52 @@ function moveDual(event, allCentros, indiceCentral) {
     allRetas[indiceCentral].x2 += andouX;
     allRetas[indiceCentral].y2 += andouY;
 
-    indice = indiceCentral;
-    if (indice == 0)
-        indice = (allCircles.length - 1);
-    else
-        indice -= 1;
+    if (lados == 2) {
+        allCircles[indiceCentral + 1].x += andouX;
+        allCircles[indiceCentral + 1].y += andouY;
+        console.log(indiceCentral);
+        if (allRetas.length > 1) {
+            if (indiceCentral > 0) {
+                allRetas[(indiceCentral - 1)].x2 = allCircles[indiceCentral].x;
+                allRetas[(indiceCentral - 1)].y2 = allCircles[indiceCentral].y;
+                if (indiceCentral < (allRetas.length - 1)) {
+                    allRetas[(indiceCentral + 1)].x1 = allCircles[indiceCentral+1].x;
+                    allRetas[(indiceCentral + 1)].y1 = allCircles[indiceCentral+1].y;
+                    allCentros[indiceCentral + 1] = retornaCentro(allRetas[indiceCentral + 1]);
+                }
+                allCentros[indiceCentral - 1] = retornaCentro(allRetas[indiceCentral - 1])
+            }
+            else {
+                allRetas[(indiceCentral + 1)].x1 = allCircles[(indiceCentral + 1)].x;
+                allRetas[(indiceCentral + 1)].y1 = allCircles[(indiceCentral + 1)].y;
+                allCentros[indiceCentral + 1] = retornaCentro(allRetas[indiceCentral + 1])
+            }
+        }
+    }
 
-    allRetas[indice].x2 = allCircles[indiceCentral].x;
-    allRetas[indice].y2 = allCircles[indiceCentral].y;
-    allCentros[indice] = retornaCentro(allRetas[indice]);
+    if (lados != 2) {
+        indice = indiceCentral;
+        if (indice == 0)
+            indice = (allCircles.length - 1);
+        else
+            indice -= 1;
 
-    indice = indiceCentral;
-    if (indice == (allCircles.length - 1))
-        indice = 0;
-    else
-        indice += 1;
+        allRetas[indice].x2 = allCircles[indiceCentral].x;
+        allRetas[indice].y2 = allCircles[indiceCentral].y;
+        allCentros[indice] = retornaCentro(allRetas[indice]);
 
-    allCircles[indice].x += andouX;
-    allCircles[indice].y += andouY;
-    allRetas[indice].x1 = allCircles[indice].x;
-    allRetas[indice].y1 = allCircles[indice].y;
-    allCentros[indice] = retornaCentro(allRetas[indice]);
+        indice = indiceCentral;
+        if (indice == (allCircles.length - 1))
+            indice = 0;
+        else
+            indice += 1;
+
+        allCircles[indice].x += andouX;
+        allCircles[indice].y += andouY;
+        allRetas[indice].x1 = allCircles[indice].x;
+        allRetas[indice].y1 = allCircles[indice].y;
+        allCentros[indice] = retornaCentro(allRetas[indice]);
+    }
 
 
     drawCircle(allCentros[indiceCentral])
@@ -236,25 +259,26 @@ function cortaReta(event, allRetas, indice) {
         insereRetas(allRetas, x, y, allRetas[indice].x1, allRetas[indice].y1, indice);
         insereCirculo(allCircles, x, y, allRetas, indice);
         insereCentro(allCentros, allRetas, indice);
+        // Correção de centro pós corte
+        if (indice == 0)
+            indice = (allRetas.length - 1)
+        else
+            indice = indice - 1;
+        allCentros[indice] = retornaCentro(allRetas[indice]);
     }
-    else
-    {
+    else {
         allRetas[indice].x2 = x;
         allRetas[indice].y2 = y;
-        console.log(indice)
-        console.log(allRetas);
-        insereRetas(allRetas, x, y, allCircles[indice+1].x, allCircles[indice+1].y, (indice+1));
-        insereCirculo(allCircles,x,y,allRetas,(indice+1));
-        console.log(allCircles);
-        
-    }
 
-    // Correção de centro pós corte
-    if (indice == 0)
-        indice = (allRetas.length - 1)
-    else
-        indice = indice - 1;
-    allCentros[indice] = retornaCentro(allRetas[indice]);
+        insereRetas(allRetas, x, y, allCircles[indice + 1].x, allCircles[indice + 1].y, (indice + 1));
+        allCircles[(indice + 1)].reta = allRetas[(indice + 1)];
+        insereCirculo(allCircles, x, y, allRetas, (indice + 1));
+        insereCentro(allCentros, allRetas, indice);
+
+        // Correçao de centro pos corte
+        allCentros[indice] = retornaCentro(allRetas[indice]);
+        allCentros[(indice + 1)] = retornaCentro(allRetas[(indice + 1)]);
+    }
 
     isMouseDown = false;
     isRightClick = false;
@@ -269,9 +293,6 @@ canvas.addEventListener("mousedown", function (event) {
     const y = event.clientY - canvas.offsetTop;
     const tolerancia = 9;
     for (i = 0; i < allCircles.length; i++) {
-
-        // const DiffXCentral = Math.abs(x - allCentros[i].x);
-        // const DiffYCentral = Math.abs(y - allCentros[i].y);
         const diffX = Math.abs(x - allCircles[i].x);
         const diffY = Math.abs(y - allCircles[i].y);
 
@@ -284,16 +305,19 @@ canvas.addEventListener("mousedown", function (event) {
                 break;
             }
         }
-        // if (DiffXCentral < tolerancia) {
-        //     if (DiffYCentral < tolerancia) {
-        //         console.log("centro")
-        //         isMouseDown = true;
-        //         isCanto = false;
-        //         isLine = true;
-        //         indiceCentral = i;
-        //     }
-        // }
-
+    }
+    for (i = 0; i < allCentros.length; i++) {
+        const DiffXCentral = Math.abs(x - allCentros[i].x);
+        const DiffYCentral = Math.abs(y - allCentros[i].y);
+        if (DiffXCentral < tolerancia) {
+            if (DiffYCentral < tolerancia) {
+                console.log("centro")
+                isMouseDown = true;
+                isCanto = false;
+                isLine = true;
+                indiceCentral = i;
+            }
+        }
     }
 
     if (isMouseDown) {
