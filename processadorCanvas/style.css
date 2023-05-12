@@ -2,4 +2,5 @@ canvas{
     border: 5px;
     border-color: black;
     border-style: solid;
+    background-color: rgb(51, 9, 51);
 }
