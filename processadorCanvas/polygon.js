@@ -1,15 +1,39 @@
 var canvas = document.getElementById("myCanvas");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 ctx = canvas.getContext("2d");
 
-lados = 9
-inicio = 0
+let inicio = 0
+let allRetas = []
+let allCircles = []
+let allCentros = []
 
-tamanhoCCentral = 5;
-tamanhoCCanto = 6;
-corCCentral = "white"
-corCCanto = "white"
-tamanhoLinha = 2;
-corLinha = "white"
+let isMouseDown = false;
+let isCanto = false;
+let isLine = false;
+let lados = 2;
+
+const tamanhoCCentral = 5;
+const tamanhoCCanto = 6;
+const corCCentral = "purple"
+const corCCanto = "lightgray"
+const tamanhoLinha = 2;
+const corLinha = "lightgray"
+
+
+//Inicia com linha
+insereRetas(allRetas, (canvas.width / 2 - 200), (canvas.height / 2), (canvas.width / 2 + 200), (canvas.height / 2), 0);
+insereCentro(allCentros, allRetas, (allCentros.length))
+insereCirculo(allCircles, canvas.width / 2 - 200, canvas.height / 2, allRetas, 1);
+insereCirculo(allCircles, canvas.width / 2 + 200, canvas.height / 2, allRetas, 1);
+
+//Desenha todas as retas e circulos
+for (i = 0; i < (allRetas.length); i++)
+    drawLine(allRetas[i], corLinha, tamanhoLinha);
+for (i = 0; i < allCentros.length; i++)
+    drawCircle(allCentros[i], corCCentral, tamanhoCCentral);
+for (i = 0; i < (allCircles.length); i++)
+    drawCircle(allCircles[i], corCCanto, tamanhoCCanto);
 
 function insereRetas(allRetas, x1, y1, x2, y2, posicao) {
     reta = {}
@@ -49,50 +73,70 @@ function insereCentro(allCentros, allRetas, posicao) {
     allCentros.splice(posicao, 0, point);
 }
 
-allRetas = []
-allCircles = []
-allCentros = []
 
-if (lados == 2) {
-    insereRetas(allRetas, (canvas.width / 2 - 200), (canvas.height / 2), (canvas.width / 2 + 200), (canvas.height / 2), 0);
-    insereCentro(allCentros, allRetas, (allCentros.length))
-    insereCirculo(allCircles, canvas.width / 2 - 200, canvas.height / 2, allRetas, 1);
-    insereCirculo(allCircles, canvas.width / 2 + 200, canvas.height / 2, allRetas, 1);
-}
-else {
-    while (1) {
-        passo = ((Math.PI * 2) / lados);
-        raio = 200
-        sen1 = (Math.round(Math.sin(inicio) * raio));
-        cos1 = (Math.round(Math.cos(inicio) * raio));
-        sen2 = (Math.round(Math.sin(inicio + passo) * raio));
-        cos2 = (Math.round(Math.cos(inicio + passo) * raio));
+function gerarPoligono(event) {
+    inicio = 0
+    allRetas = []
+    allCircles = []
+    allCentros = []
 
-        x1 = canvas.width / 2 + sen1;
-        y1 = canvas.height / 2 + cos1;
-        x2 = canvas.width / 2 + sen2;
-        y2 = canvas.height / 2 + cos2;
+    isMouseDown = false;
+    isCanto = false;
+    isLine = false;
 
-        insereRetas(allRetas, x1, y1, x2, y2, (allRetas.length));
-        insereCirculo(allCircles, x1, y1, allRetas, (allCircles.length));
-        insereCentro(allCentros, allRetas, (allCentros.length));
-        inicio += passo;
-        if (inicio > (Math.PI * 2 - 0.3))
-            break;
+    if (event.keyCode === 13 || event.type === "click") {
+        if (event.keyCode === 13)
+            lados = document.getElementById("sides").value;
+        else
+            lados = document.getElementById("reta").value;
+        if (lados >= 2 && lados <= 8) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            if (lados == 2) {
+                insereRetas(allRetas, (canvas.width / 2 - 200), (canvas.height / 2), (canvas.width / 2 + 200), (canvas.height / 2), 0);
+                insereCentro(allCentros, allRetas, (allCentros.length))
+                insereCirculo(allCircles, canvas.width / 2 - 200, canvas.height / 2, allRetas, 1);
+                insereCirculo(allCircles, canvas.width / 2 + 200, canvas.height / 2, allRetas, 1);
+            }
+            else {
+                while (1) {
+                    passo = ((Math.PI * 2) / lados);
+                    raio = 200
+                    sen1 = (Math.round(Math.sin(inicio) * raio));
+                    cos1 = (Math.round(Math.cos(inicio) * raio));
+                    sen2 = (Math.round(Math.sin(inicio + passo) * raio));
+                    cos2 = (Math.round(Math.cos(inicio + passo) * raio));
 
+                    x1 = canvas.width / 2 + sen1;
+                    y1 = canvas.height / 2 + cos1;
+                    x2 = canvas.width / 2 + sen2;
+                    y2 = canvas.height / 2 + cos2;
+
+                    insereRetas(allRetas, x1, y1, x2, y2, (allRetas.length));
+                    insereCirculo(allCircles, x1, y1, allRetas, (allCircles.length));
+                    insereCentro(allCentros, allRetas, (allCentros.length));
+                    inicio += passo;
+                    if (inicio > (Math.PI * 2 - 0.3))
+                        break;
+
+                }
+            }
+            //Desenha todas as retas e circulos
+            for (i = 0; i < allCentros.length; i++)
+                drawCircle(allCentros[i], corCCentral, tamanhoCCentral);
+            for (i = 0; i < (allRetas.length); i++)
+                drawLine(allRetas[i], corLinha, tamanhoLinha);
+            for (i = 0; i < (allCircles.length); i++)
+                drawCircle(allCircles[i], corCCanto, tamanhoCCanto);
+        }
     }
 }
+
 function getEquation(reta) {
     const slope = (reta.y2 - reta.y1) / (reta.x2 - reta.x1);
     const yIntercept = reta.y1 - slope * reta.x1;
 
     return { slope, yIntercept };
 }
-
-isMouseDown = false;
-isCanto = false;
-isLine = false;
-canto = 0;
 
 
 function drawLine(reta, cor, tamanho) {
@@ -112,14 +156,6 @@ function drawCircle(circulo, cor, raio) {
     ctx.fill();
     ctx.stroke();
 }
-
-
-for (i = 0; i < allCentros.length; i++)
-    drawCircle(allCentros[i], corCCentral, tamanhoCCentral);
-for (i = 0; i < (allRetas.length); i++)
-    drawLine(allRetas[i], corLinha, tamanhoLinha);
-for (i = 0; i < (allCircles.length); i++)
-    drawCircle(allCircles[i], corCCanto, tamanhoCCanto);
 
 
 function moveLine(event, allCircles, indiceCircle) {
@@ -200,8 +236,8 @@ function moveDual(event, allCentros, indiceCentral) {
                 allRetas[(indiceCentral - 1)].x2 = allCircles[indiceCentral].x;
                 allRetas[(indiceCentral - 1)].y2 = allCircles[indiceCentral].y;
                 if (indiceCentral < (allRetas.length - 1)) {
-                    allRetas[(indiceCentral + 1)].x1 = allCircles[indiceCentral+1].x;
-                    allRetas[(indiceCentral + 1)].y1 = allCircles[indiceCentral+1].y;
+                    allRetas[(indiceCentral + 1)].x1 = allCircles[indiceCentral + 1].x;
+                    allRetas[(indiceCentral + 1)].y1 = allCircles[indiceCentral + 1].y;
                     allCentros[indiceCentral + 1] = retornaCentro(allRetas[indiceCentral + 1]);
                 }
                 allCentros[indiceCentral - 1] = retornaCentro(allRetas[indiceCentral - 1])
@@ -248,7 +284,7 @@ function cortaReta(event, allRetas, indice) {
     const x = event.clientX - canvas.offsetLeft;
     const y = event.clientY - canvas.offsetTop;
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // ctx.clearRect(0, 0, canvas.width, canvas.height);
     if (lados != 2) {
         allRetas[indice].x2 = x;
         allRetas[indice].y2 = y;
@@ -343,11 +379,30 @@ canvas.addEventListener('contextmenu', function (event) {
     const y = event.clientY - canvas.offsetTop;
     const tolerancia = 9;
     isRightClick = true;
+    isReta = false;
     for (i = 0; i < allRetas.length; i++) {
         param = getEquation(allRetas[i]);
         const distancia = Math.abs(x * param.slope + param.yIntercept - y);
         if (distancia < (tolerancia + 4)) {
-            if (isRightClick) {
+            //Define se o click foi realmente sobre a reta
+            if (((allRetas[i].x1) < (allRetas[i].x2)) && (x > allRetas[i].x1) && (x < allRetas[i].x2)) {
+                if (((allRetas[i].y1) < (allRetas[i].y2)) && (y > allRetas[i].y1) && (y < allRetas[i].y2)) {
+                    isReta = true;
+                }
+                else if (((allRetas[i].y1) > (allRetas[i].y2)) && (y < allRetas[i].y1) && (y > allRetas[i].y2)) {
+                    isReta = true;
+                }
+            }
+            else if (((allRetas[i].x2) < (allRetas[i].x1)) && (x > allRetas[i].x2) && (x < allRetas[i].x1)) {
+                if (((allRetas[i].y1) < (allRetas[i].y2)) && (y > allRetas[i].y1) && (y < allRetas[i].y2)) {
+                    isReta = true;
+                }
+                else if (((allRetas[i].y1) > (allRetas[i].y2)) && (y < allRetas[i].y1) && (y > allRetas[i].y2)) {
+                    isReta = true;
+                }
+            }
+
+            if (isRightClick && isReta) {
                 isRightClick = false;
                 cortaReta(event, allRetas, i);
             }
