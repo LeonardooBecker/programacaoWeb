@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./polygonStyle.css">
+    <title>poligonos</title>
+</head>
+
+<body>
+    <div class="input">
+        <label for="nome">Quantidade de lados do polígono: (Entre 3 e 8)</label>
+        <input type="text" id="sides" onkeydown="gerarPoligono(event)">
+    </div>
+    <button type="button" id="reta" value="2" onclick="gerarPoligono(event)">Voltar ao modo linha</button>
+    <canvas id="myCanvas">
+    </canvas>
+    <script src="./polygon.js"></script>
+</body>
+
+</html>
