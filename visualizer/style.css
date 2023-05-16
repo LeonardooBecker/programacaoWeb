@@ -1,0 +1,9 @@
+tr{
+}
+td{
+    display: absolute;
+    border: 5px;
+}
+.table{
+    font-size: 30px;
+}
