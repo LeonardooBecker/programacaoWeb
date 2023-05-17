@@ -6,29 +6,42 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;700;900&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
 
 <body>
-    <!-- <h1>OIII</h1> -->
-    <table id="demo">
-    </table>
 
+    <h1>Escolha o aluno a ser visualizado: <span>(Digite "GRR" para autocomplete)</span></h1>
     <input type="text" id="grr">
-    <input type="button" value="enviar" id="btn">
+    <div id="autocomplete"></div>
 
 
     <!-- Modal -->
     <div id="modal" class="modal">
         <div class="modal-content">
             <span id="closeModal" class="close">&times;</span>
-            <h2>Título do Modal</h2>
-            <p>Conteúdo do modal...</p>
+            <table>
+                <thead id="clickHeader">
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Discplina</th>
+                        <th>Ano</th>
+                        <th>Período</th>
+                        <th>Situação</th>
+                        <th>Nota</th>
+                        <th>Frequência</th>
+                    </tr>
+                </thead>
+                <tbody id="clickBody">
+
+                </tbody>
+            </table>
         </div>
     </div>
 
-    
-    <table>
+
+    <table id="grade">
         <thead class="thead-dark">
             <tr>
                 <th>1º</th>
@@ -43,54 +56,54 @@
         </thead>
         <tbody>
             <tr>
-                <td class="table-light"><b>CI068</b> <br> Circuitos Lógicos</td>
-                <td class="table-light"><b>CI210</b> <br> Projetos Digitais e Microprocessadores</td>
-                <td class="table-light"><b>CI212</b> <br> Organização e Arquitetura de Computadores</td>
-                <td class="table-light"><b>CI215</b> <br> Sistemas Operacionais</td>
-                <td class="table-light"><b>CI162</b> <br> Engenharia de Requisitos</td>
-                <td class="table-light"><b>CI163</b> <br> Projeto de Software</td>
-                <td class="table-light"><b>CI221</b> <br> Engenharia de Software</td>
-                <td class="table-light"><b>OPT</b> <br> Optativa</td>
+                <td><b>CI068</b> <br> Circuitos Lógicos</td>
+                <td><b>CI210</b> <br> Projetos Digitais e Microprocessadores</td>
+                <td><b>CI212</b> <br> Organização e Arquitetura de Computadores</td>
+                <td><b>CI215</b> <br> Sistemas Operacionais</td>
+                <td><b>CI162</b> <br> Engenharia de Requisitos</td>
+                <td><b>CI163</b> <br> Projeto de Software</td>
+                <td><b>CI221</b> <br> Engenharia de Software</td>
+                <td><b>OPT</b> <br> Optativa</td>
             </tr>
             <tr>
-                <td class="table-light"><b>CI055</b> <br> Algoritmos e Estruturas de Dados I</td>
-                <td class="table-light"><b>CI056</b> <br> Algoritmos e Estruturas de Dados II</td>
-                <td class="table-light"><b>CI057</b> <br> Algoritmos e Estruturas de Dados III</td>
-                <td class="table-light"><b>CI062</b> <br> Técnicas Alternativas de Programação</td>
-                <td class="table-light"><b>CI065</b> <br> Algoritmos e Teoria dos Grafos</td>
-                <td class="table-light"><b>CI165</b> <br> Análise de Algoritmos</td>
-                <td class="table-light"><b>CI211</b> <br> Construção de Compiladores</td>
-                <td class="table-light"><b>OPT</b> <br> Optativa</td>
+                <td><b>CI055</b> <br> Algoritmos e Estruturas de Dados I</td>
+                <td><b>CI056</b> <br> Algoritmos e Estruturas de Dados II</td>
+                <td><b>CI057</b> <br> Algoritmos e Estruturas de Dados III</td>
+                <td><b>CI062</b> <br> Técnicas Alternativas de Programação</td>
+                <td><b>CI065</b> <br> Algoritmos e Teoria dos Grafos</td>
+                <td><b>CI165</b> <br> Análise de Algoritmos</td>
+                <td><b>CI211</b> <br> Construção de Compiladores</td>
+                <td><b>OPT</b> <br> Optativa</td>
             </tr>
             <tr>
-                <td class="table-light"><b>CM046</b> <br> Introdução a Álbebra</td>
-                <td class="table-light"><b>CI067</b> <br> Oficina de Computação</td>
-                <td class="table-light"><b>CI064</b> <br> Software Básico</td>
-                <td class="table-light"><b>CE003</b> <br> Estatística II</td>
-                <td class="table-light"><b>CI059</b> <br> Introdução à Teoria da Computação</td>
-                <td class="table-light"><b>CI209</b> <br> Inteligência Artificial</td>
-                <td class="table-light"><b>OPT</b> <br> Optativa</td>
-                <td class="table-light"><b>OPT</b> <br> Optativa</td>
+                <td><b>CM046</b> <br> Introdução a Álbebra</td>
+                <td><b>CI067</b> <br> Oficina de Computação</td>
+                <td><b>CI064</b> <br> Software Básico</td>
+                <td><b>CE003</b> <br> Estatística II</td>
+                <td><b>CI059</b> <br> Introdução à Teoria da Computação</td>
+                <td><b>CI209</b> <br> Inteligência Artificial</td>
+                <td><b>OPT</b> <br> Optativa</td>
+                <td><b>OPT</b> <br> Optativa</td>
             </tr>
             <tr>
-                <td class="table-light"><b>CM045</b> <br> Geometria Analítica I</td>
-                <td class="table-light"><b>CM005</b> <br> Álbebra Linear</td>
-                <td class="table-light"><b>CI237</b> <br> Matemática Discreta</td>
-                <td class="table-light"><b>CI058</b> <br> Redes de Computadores I</td>
-                <td class="table-light"><b>CI061</b> <br> Redes de Computadores II</td>
-                <td class="table-light"><b>CI218</b> <br> Sistemas de Bancos de Dados</td>
-                <td class="table-light"><b>OPT</b> <br> Optativa</td>
-                <td class="table-light"><b>OPT</b> <br> Optativa</td>
+                <td><b>CM045</b> <br> Geometria Analítica I</td>
+                <td><b>CM005</b> <br> Álbebra Linear</td>
+                <td><b>CI237</b> <br> Matemática Discreta</td>
+                <td><b>CI058</b> <br> Redes de Computadores I</td>
+                <td><b>CI061</b> <br> Redes de Computadores II</td>
+                <td><b>CI218</b> <br> Sistemas de Bancos de Dados</td>
+                <td><b>OPT</b> <br> Optativa</td>
+                <td><b>OPT</b> <br> Optativa</td>
             </tr>
             <tr>
-                <td class="table-light"><b>CM201</b> <br> Cálculo Diferencial e Integral I</td>
-                <td class="table-light"><b>CM202</b> <br> Cálculo Diferencial e Integral II</td>
-                <td class="table-light"><b>CI166</b> <br> Metodologia Científica</td>
-                <td class="table-light"><b>CI164</b> <br> Introdução à Computação Científica</td>
-                <td class="table-light"><b>SA214</b> <br> Introdução a Teoria Geral da Administração</td>
-                <td class="table-light"><b>CI220</b> <br> Teoria de Sistemas</td>
-                <td class="table-light"><b>TG I</b> <br> Trabalho de Graduação I</td>
-                <td class="table-light"><b>TG II</b> <br> Trabalho de Graduação II</td>
+                <td><b>CM201</b> <br> Cálculo Diferencial e Integral I</td>
+                <td><b>CM202</b> <br> Cálculo Diferencial e Integral II</td>
+                <td><b>CI166</b> <br> Metodologia Científica</td>
+                <td><b>CI164</b> <br> Introdução à Computação Científica</td>
+                <td><b>SA214</b> <br> Introdução a Teoria Geral da Administração</td>
+                <td><b>CI220</b> <br> Teoria de Sistemas</td>
+                <td><b>TG I</b> <br> Trabalho de Graduação I</td>
+                <td><b>TG II</b> <br> Trabalho de Graduação II</td>
             </tr>
         </tbody>
     </table>

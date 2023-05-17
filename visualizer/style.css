@@ -1,36 +1,114 @@
-td {
-    display: absolute;
-    border: 5px;
+body {
+    background-color: #282828;
 }
 
-.sl {
-    background-color: lightblue;
+h1{
+    color: lightgray;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 25px;
+    text-align: center;
+}
+h1 span{
+    font-weight: 100;
+    font-size: 20px;
+}
+
+table {
+    color: lightgray;
+    font-size: 12px;
+    font-weight: lighter;
+    text-align: center;
+    width: 80%;
+    margin: auto;
+    background-color: #070707;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 15px;
+}
+
+td {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    border: 50px;
+    padding: 8px;
+    background-color: #282828;
+}
+
+th {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    border: 50px;
+    padding: 8px;
+    background-color: #504d4d;
+}
+
+#grr{
+    background-color: lightgray;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    width: 150px;
+    display: block;
+    margin: auto;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+
+}
+
+.textComplete{
+    font-weight: 700;
+}
+
+#autocomplete {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    color: black;
+    border-color:solid lightgray;
+    width: 99%;
+    position: absolute;
+    border: 0px;
+    display: block;
+    margin: auto;
+}
+
+#autocomplete p {
+    width: 100%;
+    width: fit-content;
+    margin: auto;
+    background-color: lightgray;
+    padding: 5px 15px;
+}
+
+b {
+    font-size: 16px;
 }
 
 .reprovado {
     background-color: lightcoral;
+    color: black;
 }
 
 .aprovado {
-    background-color: lightgreen;
+    background-color: #90ee90;
+    color: black;
 }
 
 .matricula {
-    background-color: lightblue;
+    background-color: #85c6db;
+    color: black;
 }
 
 .equivalencia {
-    background-color: lightyellow;
+    background-color: #ffdb58;
+    color: black;
 }
 
-.my-alert {
-    background-color: #f2f2f2;
-    color: #333;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+.none{
+    background-color: rgb(235, 230, 230);
+    color: black;
 }
-
 
 /* Estilos para o modal */
 .modal {
@@ -48,11 +126,24 @@ td {
 }
 
 .modal-content {
-    background-color: #fff;
-    margin: 20% auto;
+    background-color: #070707;
+    margin: 10% auto;
     padding: 20px;
-    border: 1px solid #888;
+    border-radius: 5px;
+    font-size: 15px;
     width: 80%;
+}
+
+.modal-content p{
+    color: lightgray;
+    width: 80%;
+    background-color: #504d4d;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    text-align: center;
+    margin: auto;
+    border-radius: 5px;
+    padding: 5px;
 }
 
 .close {
@@ -60,6 +151,7 @@ td {
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
+    color: lightgray;
 }
 
 /* Estilos adicionais para personalizar o modal */
