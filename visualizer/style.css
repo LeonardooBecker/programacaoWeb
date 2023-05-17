@@ -2,14 +2,15 @@ body {
     background-color: #282828;
 }
 
-h1{
+h1 {
     color: lightgray;
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
     font-size: 25px;
     text-align: center;
 }
-h1 span{
+
+h1 span {
     font-weight: 100;
     font-size: 20px;
 }
@@ -44,7 +45,7 @@ th {
     background-color: #504d4d;
 }
 
-#grr{
+#grr {
     background-color: lightgray;
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
@@ -57,7 +58,7 @@ th {
 
 }
 
-.textComplete{
+.textComplete {
     font-weight: 700;
 }
 
@@ -65,7 +66,7 @@ th {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     color: black;
-    border-color:solid lightgray;
+    border-color: solid lightgray;
     width: 99%;
     position: absolute;
     border: 0px;
@@ -105,7 +106,7 @@ b {
     color: black;
 }
 
-.none{
+.none {
     background-color: rgb(235, 230, 230);
     color: black;
 }
@@ -134,7 +135,7 @@ b {
     width: 80%;
 }
 
-.modal-content p{
+.modal-content p {
     color: lightgray;
     width: 80%;
     background-color: #504d4d;
@@ -156,3 +157,21 @@ b {
 
 /* Estilos adicionais para personalizar o modal */
 /* ... */
+
+.ui-menu-item {
+    font-size: 16px;
+    padding: 8px;
+    cursor: pointer;
+    background-color: lightgray;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+
+.ui-state-focus {
+    background-color: lightgray;
+    color: pink;
+}
+
+.ui-helper-hidden-acessible{
+    background-color: pink;
+}

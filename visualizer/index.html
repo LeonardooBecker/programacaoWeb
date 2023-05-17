@@ -7,15 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;700;900&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/smoothness/jquery-ui.css" />
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
     <title>Document</title>
 </head>
 
 <body>
 
     <h1>Escolha o aluno a ser visualizado: <span>(Digite "GRR" para autocomplete)</span></h1>
-    <input type="text" id="grr">
+    <input type="text" id="grr" class="autocomplete">
     <div id="autocomplete"></div>
 
+    <input type="text" class="autocomplete">
 
     <!-- Modal -->
     <div id="modal" class="modal">
@@ -107,7 +111,6 @@
             </tr>
         </tbody>
     </table>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="./script.js"></script>
 </body>
 
