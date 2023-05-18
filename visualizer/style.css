@@ -10,6 +10,22 @@ h1 {
     text-align: center;
 }
 
+h2{
+    color: lightgray;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 22px;
+    text-align: center;
+}
+
+h3{
+    color: lightgray;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    text-align: center;
+}
+
 h1 span {
     font-weight: 100;
     font-size: 20px;
@@ -165,13 +181,4 @@ b {
     background-color: lightgray;
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
-}
-
-.ui-state-focus {
-    background-color: lightgray;
-    color: pink;
-}
-
-.ui-helper-hidden-acessible{
-    background-color: pink;
 }

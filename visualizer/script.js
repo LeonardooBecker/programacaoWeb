@@ -15,6 +15,19 @@ var aluno = "";
 var attMatricula = 0;
 
 $(document).ready(function () {
+    $(function () {
+        $(".autocomplete").autocomplete({
+            source: allMatriculas,
+            select:
+                function (event, ui) {
+                    aluno = ui.item.value;
+                    loadDoc();
+                }
+        });
+    });
+});
+
+$(document).ready(function () {
     loadDoc();
 });
 
@@ -61,12 +74,16 @@ function myFunction(xml) {
     vetorGrade = []
     grade = $("#grade td");
 
+
     if (allMatriculas.includes(aluno)) {
+        $("#alunoAtual").remove();
+        $("#aluno").append("<h3 id='alunoAtual'>Aluno: " + aluno + "</h3>")
         limpaTabela();
     }
-    else
+    else {
+        $("#alunoAtual").remove();
         tabelaInvalida();
-
+    }
     for (i = 0; i < grade.length; i++) {
         vetorGrade.push($(grade[i]).find("b").text());
     }
@@ -215,6 +232,9 @@ $(document).ready(function () {
     });
 });
 
+$(".ui-helper-hidden-acessible").click(function () {
+    console.log("JIUJAISGJa")
+});
 // $(document).ready(function () {
 
 //     let iguais = 0;
@@ -237,9 +257,3 @@ $(document).ready(function () {
 //         }
 //     });
 // });
-
-$(function () {
-    $(".autocomplete").autocomplete({
-        source: allMatriculas
-    });
-});
