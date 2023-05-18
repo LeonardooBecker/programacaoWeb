@@ -231,29 +231,3 @@ $(document).ready(function () {
         }
     });
 });
-
-$(".ui-helper-hidden-acessible").click(function () {
-    console.log("JIUJAISGJa")
-});
-// $(document).ready(function () {
-
-//     let iguais = 0;
-//     $("#grr").on("input", function () {
-//         input = $(this).val();
-//         $("#autocomplete").empty();
-//         for (i = 0; i < allMatriculas.length; i++) {
-//             iguais = 1;
-//             for (j = 0; j < input.length; j++) {
-//                 if (allMatriculas[i][j] != input[j])
-//                     iguais = 0;
-//             }
-//             if ((iguais == 1) && (input.length != 0)) {
-//                 substr = allMatriculas[i].slice(input.length, allMatriculas.length);
-//                 info = "<p>" + "<span class='textComplete'>" + input + "</span>" + substr + "</p>"
-//                 $("#autocomplete").append(info);
-//             }
-//             if (input == allMatriculas[i])
-//                 $("#autocomplete").empty();
-//         }
-//     });
-// });
