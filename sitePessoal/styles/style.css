@@ -24,6 +24,7 @@ main{
 }
 
 nav{
+    position: sticky;
     padding: 20px 80px;
     background-image: radial-gradient(ellipse, #1F1B24, #131116);
 }

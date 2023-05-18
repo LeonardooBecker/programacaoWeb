@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/visualizerStyle.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;700;900&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/2d611c54d2.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/smoothness/jquery-ui.css" />
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+    <script src="./javaScript/visualizerScript.js"></script>
+    <title>Visualizeitor</title>
+</head>
+
+<body>
+
+    <div class="meio">
+        <nav>
+            <h1 id="nomePrincipal">Leonardo Becker</h1>
+            <img src="./images/leonardo.jpeg" class="fotoPerfil" alt="foto de perfil">
+            <ul>
+                <li><a href="index.html"><i class="fa-solid fa-house"></i>&emsp;Home</a></li>
+                <li><a href="iniciacao.html"><i class="fa-solid fa-book"></i>&emsp;Iniciação Científica</a></li>
+                <li><a href="projetos.html"><i class="fa-solid fa-diagram-project"></i>&emsp;Projetos</a></li>
+                <li><a href="polygon.html" target="_blank"><i class="fa-solid fa-draw-polygon"></i>&emsp;Polígonos</a></li>
+                <li><a href="visualizer.html"><i class="fa-solid fa-eye"></i>&emsp;Visualizer</a></li>
+                <li><a href="https://www.linkedin.com/in/leonardobeckeroliveira/" target="_blank"><i class="fa-brands fa-linkedin"></i>&emsp;Linkedin</a></li>
+                <li><a href="https://github.com/LeonardooBecker" target="_blank"><i class="fa-brands fa-github"></i>&emsp;GitHub</a></li>
+            </ul>
+        </nav>
+        <main>
+            <h1>Escolha o aluno a ser visualizado: <span>(Digite "GRR" para autocomplete)</span></h1>
+            <input type="text" id="grr" class="autocomplete">
+            <div id="autocomplete"></div>
+        
+            <div id="modal" class="modal">
+                <div class="modal-content">
+                    <span id="closeModal" class="close">&times;</span>
+                    <table>
+                        <thead id="clickHeader">
+                            <tr>
+                                <th>Codigo</th>
+                                <th>Discplina</th>
+                                <th>Ano</th>
+                                <th>Período</th>
+                                <th>Situação</th>
+                                <th>Nota</th>
+                                <th>Frequência</th>
+                            </tr>
+                        </thead>
+                        <tbody id="clickBody">
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            
+            <h2>Grade do curso</h2>
+            <table id="grade">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>1º</th>
+                        <th>2º</th>
+                        <th>3º</th>
+                        <th>4º</th>
+                        <th>5º</th>
+                        <th>6º</th>
+                        <th>7º</th>
+                        <th>8º</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>CI068</b> <br> Circuitos Lógicos</td>
+                        <td><b>CI210</b> <br> Projetos Digitais e Microprocessadores</td>
+                        <td><b>CI212</b> <br> Organização e Arquitetura de Computadores</td>
+                        <td><b>CI215</b> <br> Sistemas Operacionais</td>
+                        <td><b>CI162</b> <br> Engenharia de Requisitos</td>
+                        <td><b>CI163</b> <br> Projeto de Software</td>
+                        <td><b>CI221</b> <br> Engenharia de Software</td>
+                        <td><b>OPT</b> <br> Optativa</td>
+                    </tr>
+                    <tr>
+                        <td><b>CI055</b> <br> Algoritmos e Estruturas de Dados I</td>
+                        <td><b>CI056</b> <br> Algoritmos e Estruturas de Dados II</td>
+                        <td><b>CI057</b> <br> Algoritmos e Estruturas de Dados III</td>
+                        <td><b>CI062</b> <br> Técnicas Alternativas de Programação</td>
+                        <td><b>CI065</b> <br> Algoritmos e Teoria dos Grafos</td>
+                        <td><b>CI165</b> <br> Análise de Algoritmos</td>
+                        <td><b>CI211</b> <br> Construção de Compiladores</td>
+                        <td><b>OPT</b> <br> Optativa</td>
+                    </tr>
+                    <tr>
+                        <td><b>CM046</b> <br> Introdução a Álbebra</td>
+                        <td><b>CI067</b> <br> Oficina de Computação</td>
+                        <td><b>CI064</b> <br> Software Básico</td>
+                        <td><b>CE003</b> <br> Estatística II</td>
+                        <td><b>CI059</b> <br> Introdução à Teoria da Computação</td>
+                        <td><b>CI209</b> <br> Inteligência Artificial</td>
+                        <td><b>OPT</b> <br> Optativa</td>
+                        <td><b>OPT</b> <br> Optativa</td>
+                    </tr>
+                    <tr>
+                        <td><b>CM045</b> <br> Geometria Analítica I</td>
+                        <td><b>CM005</b> <br> Álbebra Linear</td>
+                        <td><b>CI237</b> <br> Matemática Discreta</td>
+                        <td><b>CI058</b> <br> Redes de Computadores I</td>
+                        <td><b>CI061</b> <br> Redes de Computadores II</td>
+                        <td><b>CI218</b> <br> Sistemas de Bancos de Dados</td>
+                        <td><b>OPT</b> <br> Optativa</td>
+                        <td><b>OPT</b> <br> Optativa</td>
+                    </tr>
+                    <tr>
+                        <td><b>CM201</b> <br> Cálculo Diferencial e Integral I</td>
+                        <td><b>CM202</b> <br> Cálculo Diferencial e Integral II</td>
+                        <td><b>CI166</b> <br> Metodologia Científica</td>
+                        <td><b>CI164</b> <br> Introdução à Computação Científica</td>
+                        <td><b>SA214</b> <br> Introdução a Teoria Geral da Administração</td>
+                        <td><b>CI220</b> <br> Teoria de Sistemas</td>
+                        <td><b>TG I</b> <br> Trabalho de Graduação I</td>
+                        <td><b>TG II</b> <br> Trabalho de Graduação II</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="aluno"></div>
+        </main>
+    </div>
+    
+    <footer>
+        <p><i class="fa-solid fa-copyright"></i>&emsp;LEONARDO BECKER DE OLIVEIRA - CIENCIA DA COMPUTACAO - UFPR</p>
+    </footer>
+</body>
+
+</html>
