@@ -9,12 +9,14 @@
         <%= estado.sigla %>
         </span>
     </div>
-    <div class=operaModal>
-        <span>
-            <%= link_to "Edit this estado", edit_estado_path(estado) %>
-        </span>
-        <span>
-            <%= button_to "Destroy this estado", estado, method: :delete %>
-        </span>
-    </div>
+    <% if current_user.role == 'admin' %>
+        <div class=operaModal>
+            <span>
+                <%= link_to "Edit this estado", edit_estado_path(estado) %>
+            </span>
+            <span>
+                <%= button_to "Destroy this estado", estado, method: :delete %>
+            </span>
+        </div>
+    <% end %>
 </div>

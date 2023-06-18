@@ -13,12 +13,14 @@
         <%= matricula.aluno.nome %>
         </span>
     </div>
-    <div class=operaModal>
-        <span>
-            <%= link_to "Edit this matricula", edit_matricula_path(matricula) %>
-        </span>
-        <span>
-            <%= button_to "Destroy this matricula", matricula, method: :delete %>
-        </span>
-    </div>
+    <% if current_user.role == 'admin' %>
+        <div class=operaModal>
+            <span>
+                <%= link_to "Edit this matricula", edit_matricula_path(matricula) %>
+            </span>
+            <span>
+                <%= button_to "Destroy this matricula", matricula, method: :delete %>
+            </span>
+        </div>
+    <% end %>
 </div>

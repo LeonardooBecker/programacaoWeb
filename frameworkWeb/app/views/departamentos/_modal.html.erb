@@ -9,12 +9,14 @@
         <%= departamento.campus %>
         </span>
     </div>
-    <div class=operaModal>
-        <span>
-            <%= link_to "Edit this departamento", edit_departamento_path(departamento) %>
-        </span>
-        <span>
-            <%= button_to "Destroy this departamento", departamento, method: :delete %>
-        </span>
-    </div>
+    <% if current_user.role == 'admin' %>
+        <div class=operaModal>
+            <span>
+                <%= link_to "Edit this departamento", edit_departamento_path(departamento) %>
+            </span>
+            <span>
+                <%= button_to "Destroy this departamento", departamento, method: :delete %>
+            </span>
+        </div>
+    <% end %>
 </div>

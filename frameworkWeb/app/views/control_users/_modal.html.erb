@@ -9,11 +9,13 @@
             <%= user.role %>
         </span>
         
-        <div class=operaModal>
-            <span>
-                <%= button_to "Destroy this user", control_user_path(user), method: :delete %>
-            </span>
-        </div>
+        <% if current_user.role == 'admin' %>
+            <div class=operaModal>
+                <span>
+                    <%= button_to "Destroy this user", control_user_path(user), method: :delete %>
+                </span>
+            </div>
+        <% end %>
         
     
 

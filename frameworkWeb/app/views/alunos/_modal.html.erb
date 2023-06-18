@@ -13,12 +13,14 @@
             <%= aluno.estado.nome %>
         </span>
     </div>
-    <div class=operaModal>
-        <span>
-            <%= link_to "Edit this aluno", edit_aluno_path(aluno) %>
-        </span>
-        <span>
-            <%= button_to "Destroy this aluno", aluno, method: :delete %>
-        </span>
-    </div>
+    <% if current_user.role == 'admin' %>
+        <div class=operaModal>
+            <span>
+                <%= link_to "Edit this aluno", edit_aluno_path(aluno) %>
+            </span>
+            <span>
+                <%= button_to "Destroy this aluno", aluno, method: :delete %>
+            </span>
+        </div>
+    <% end  %>
 </div>

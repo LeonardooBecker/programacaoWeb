@@ -9,12 +9,13 @@
             <%= elem.departamento.nome %>
         </span>
         
+        <% if current_user.role == 'admin' %>
         <div class=operaModal>
-        <span>
-            <%= button_to "Destroy this AlunoDepartamento", delete_aluno_departamento_path(elem.aluno), method: :delete %>
-        </span>
-        </div>
-
+            <span>
+                <%= button_to "Destroy this AlunoDepartamento", delete_aluno_departamento_path(elem.aluno), method: :delete %>
+            </span>
+            </div>
+        <% end %>
         
         
     
