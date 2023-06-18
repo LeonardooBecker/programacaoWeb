@@ -1,0 +1,40 @@
+<p style="color: green"><%= notice %></p>
+<h1>Estados</h1>
+
+<div id="link-top">
+  <%= link_to  "Home", root_path %>
+</div>
+
+<div id="estados">
+  <table>
+    <thead>
+      <tr>
+      <th>Id</th>
+        <th>Nome</th>
+        <th>Sigla</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @estados.each do |estado| %>
+        <%= render "table",  estado: estado %> 
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<% if current_user.role == 'admin' %>
+<div id="link-bottom">
+  <%= link_to "New estado", new_estado_path %>
+</div>
+<% end  %>
+
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span data-controller="fade" data-action="click->fade#fade_out" id="close-modal" class="close">&times;</span>
+      <% @estados.each do |estado| %>
+        <%= render "modal",  estado: estado %> 
+      <% end %>
+  </div>
+</div>
+
+

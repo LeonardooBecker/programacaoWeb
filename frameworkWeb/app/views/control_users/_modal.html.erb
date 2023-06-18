@@ -1,0 +1,21 @@
+<div id="opestado<%= user.id %>" style="display: none" class="allModal">
+    <div class="textModal">
+        <span>
+            Email:
+            <%= user.email %>
+        </span>
+        <span>
+            Role:
+            <%= user.role %>
+        </span>
+        
+        <div class=operaModal>
+            <span>
+                <%= button_to "Destroy this user", control_user_path(user), method: :delete %>
+            </span>
+        </div>
+        
+    
+
+    </div>
+</div>

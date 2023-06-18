@@ -1,0 +1,429 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+body{
+    font-family: Arial, sans-serif;
+    background-color: #282828;
+    color: lightgray;
+    margin: 0px;
+}
+
+#main-login{
+    display: flex;
+    background-color: black;
+    /* display: block; */
+}
+
+#main-login h1{
+    padding: 60px;
+    padding-bottom: 45px;
+}
+
+
+#main-login ul{
+    position: absolute;
+    right: 0;
+    margin: 0px;
+    margin-right: 50px;
+    background-color: black;
+    list-style-type: none;
+    padding: 30px;
+    padding-top: 60px;
+    border-radius: 15px;
+}
+
+#main-login li{
+    text-align: center;
+}
+
+.main-sign{
+    color: lightgray;
+}
+
+.main-sign:hover{
+    color: rgb(87, 84, 84);
+}
+
+.main-links{
+    display: block;
+    flex-direction: column;
+    width: fit-content;
+    margin: auto;
+}
+
+
+#main-links a{
+    font-size: 19px;
+    font-weight: 900;
+    color: lightgray;
+    margin-top: 20px;
+}
+
+#main-links a:hover{
+    color: rgb(82, 80, 80);
+}
+
+h3{
+    display: block;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 900;
+    text-shadow: 8px 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+.field{
+    width: fit-content;
+    margin: auto;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 900;
+}
+.field input{
+    padding: 8px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+h2{
+    background-color: rgb(14, 13, 13);
+    text-align: center;
+    width: fit-content;
+    padding: 20px 50px 20px 50px;
+    margin: auto;
+    margin-top: 50px;
+    padding-top: 20px;
+    border-radius: 15px 15px 0px 0px;
+}    
+
+.sign{
+    display: block;
+    width: fit-content;
+    margin: auto;
+    text-align: center;
+    background-color: rgb(14, 13, 13);
+    padding: 20px 50px 20px 50px;
+    color: lightgray;
+    border-radius: 0px 0px 15px 15px;
+}
+
+.sign a{
+    display: flex;
+    width: fit-content;
+    margin: auto;
+    color: lightgray;
+}
+
+.sign a:hover{
+    color: rgb(61, 61, 61);
+}
+
+br{
+    height: 0px;
+    width: 0px;
+}
+
+.actions{
+    width: fit-content;
+    margin: auto;
+}
+
+.actions input{
+    width: 100px;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.new_user{
+    background-color: rgb(14, 13, 13);
+    border-radius: 15px;
+    padding: 60px;
+    width: fit-content;
+    margin: auto;
+}
+
+.new_user label{
+    display: block;
+    margin: auto;
+    text-align: center;
+    font-size: 19px;
+    font-weight: 900;
+    padding-bottom: 5px;
+    padding-top: 15px;
+}
+
+.new_user input{
+    display: block;
+    margin: auto;
+}
+
+.new_user select{
+    display: block;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 30px;
+}
+
+h1{
+    margin: auto;
+    margin-top: 30px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#link-top{
+    padding: 20px;
+    background-color: black;
+    display: block;
+    width: fit-content;
+    border-radius: 10px 10px 0px 0px;
+    margin: auto;
+}
+
+
+#link-bottom{
+    padding: 20px;
+    background-color: black;
+    display: block;
+    width: fit-content;
+    border-radius: 0px 0px 10px 10px;
+    margin: auto;
+}
+
+
+#link-top a, #link-bottom a{
+    color: lightgray;
+    background-color: black;
+    padding: 8px;
+    border-radius: 5px;
+    font-weight: 700;
+}
+
+#link-top a:hover, #link-bottom a:hover{
+    color: rgb(128, 127, 127);
+}
+
+
+table{
+    padding: 10px;
+    background-color: black;
+    border-radius: 20px;
+    text-align: center;
+    margin: auto;
+}
+
+
+tr{
+    background-color: #282828;
+}
+
+
+td, th{
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.formEdit label{
+    font-size: 18px;
+    font-weight: 900;
+    padding: 5px;
+    text-align: center;
+    display: block;
+    margin: auto;
+}
+
+.formEdit input{
+    display: block;
+    margin: auto;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.edit{
+    width: fit-content;
+    margin: auto;
+}
+
+.edit a{
+    color: lightgray;
+    background-color: #282828;
+}
+
+.edit a:hover{
+    color: black;
+    background-color: #282828;
+}
+
+.show{
+    font-size: 18px;
+    font-weight: 900;
+    text-align: center;
+}
+
+.showLinks{
+    width: fit-content;
+    margin: auto;
+}
+.showLinks a{
+    color: lightgray;
+    background-color: #282828;
+}
+.showLinks a:hover{
+    color: black;
+    background-color: #282828;
+}
+
+.showLinksBlack{
+    width: fit-content;
+    margin: auto;
+    margin-top: 20px;
+}
+.showLinksBlack a{
+    color: lightgray;
+    background-color: rgb(14, 13, 13);
+}
+.showLinksBlack a:hover{
+    color: rgb(85, 84, 84);
+}
+
+.showLinks button{
+    background-color: lightgray;
+    padding: 5px;
+    color: black;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.showLinks .button_to{
+    width: fit-content;
+    margin: auto;
+    padding: 10px;
+}
+
+.showLinks button:hover{
+    background-color: #070707;
+    color: lightgray;
+}
+
+#userTable{
+    background-color: black;
+    width: fit-content;
+    padding: 20px;
+    border-radius: 15px;
+    margin: auto;
+}
+
+p{
+    background-color: #282828;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 3px;
+}
+
+/* Estilos para o modal */
+.modal {
+    display: none;
+    /* Oculta o modal por padrão */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Fundo semi-transparente */
+}
+
+.modal-content {
+    background-color: #070707;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 5px;
+    font-size: 15px;
+    width: 80%;
+}
+
+.allModal{
+    display: block;
+    padding: 10px;
+}
+
+.textModal{
+    color: lightgray;
+    font-size: 18px;
+    font-weight: 900;
+    display: flex;
+    flex-direction: column;
+    padding: 0px 10px;
+}
+
+.operaModal a{
+    background-color: #070707;
+    display:block;
+    width: fit-content;
+    color: lightgray;
+    font-size: 18px;
+    font-weight: 900;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.operaModal button{
+    background-color: #070707;
+    font-size: 18px;
+    font-weight: 900;
+    padding: 10px;
+    color: lightgray;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.operaModal button:hover{
+    background-color: lightgray;
+    color: black;
+}
+
+.operaModal{
+    display: flex;
+    flex-direction: column;
+}
+
+.textModal span{
+    padding: 10px;
+}
+
+.operaModal span{
+    padding: 0px 10px;
+}
+
+.operaModal a:hover{
+    background-color: lightgray;
+    color: black;
+}
+
+
+.close {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    color: lightgray;
+}

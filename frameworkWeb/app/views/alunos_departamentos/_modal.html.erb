@@ -1,0 +1,23 @@
+<div id="opestado<%= elem.aluno_id %>" style="display: none" class="allModal">
+    <div class="textModal">
+        <span>
+            Aluno:
+            <%= elem.aluno.nome %>
+        </span>
+        <span>
+            Departamento:
+            <%= elem.departamento.nome %>
+        </span>
+        
+        <div class=operaModal>
+        <span>
+            <%= button_to "Destroy this AlunoDepartamento", delete_aluno_departamento_path(elem.aluno), method: :delete %>
+        </span>
+        </div>
+
+        
+        
+    
+
+    </div>
+</div>

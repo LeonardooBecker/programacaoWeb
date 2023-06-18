@@ -1,0 +1,39 @@
+<p style="color: green"><%= notice %></p>
+<h1>Departamentos</h1>
+
+<div id="link-top">
+  <%= link_to  "Home", root_path %>
+</div>
+
+<div id="departamentos">
+  <table>
+    <thead>
+      <tr>
+      <th>Id</th>
+        <th>Nome</th>
+        <th>Campus</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @departamentos.each do |departamento| %>
+        <%= render "table",  departamento: departamento %> 
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<% if current_user.role == 'admin' %>
+<div id="link-bottom">
+  <%= link_to "New departamento", new_departamento_path %>
+</div>
+<% end  %>
+
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span id="close-modal" class="close" data-controller="fade" data-action="click->fade#fade_out">&times;</span>
+      <% @departamentos.each do |departamento| %>
+        <%= render "modal",  departamento: departamento %> 
+      <% end %>
+  </div>
+</div>
+

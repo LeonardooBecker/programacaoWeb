@@ -1,0 +1,2 @@
+module AlunoDepartamentosHelper
+end

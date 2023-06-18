@@ -1,0 +1,24 @@
+<div id="opestado<%= matricula.id %>" style="display: none" class="allModal">
+    <div class="textModal">
+    <span>
+        Ano:
+        <%= matricula.ano %>
+        </span>
+        <span>
+        Complemento:
+        <%= matricula.complemento %>
+        </span>
+        <span>
+        Aluno:
+        <%= matricula.aluno.nome %>
+        </span>
+    </div>
+    <div class=operaModal>
+        <span>
+            <%= link_to "Edit this matricula", edit_matricula_path(matricula) %>
+        </span>
+        <span>
+            <%= button_to "Destroy this matricula", matricula, method: :delete %>
+        </span>
+    </div>
+</div>

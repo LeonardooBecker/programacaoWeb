@@ -1,0 +1,20 @@
+<div id="opestado<%= departamento.id %>" style="display: none" class="allModal">
+    <div class="textModal">
+    <span>
+        Nome:
+        <%= departamento.nome %>
+        </span>
+        <span>
+        Campus:
+        <%= departamento.campus %>
+        </span>
+    </div>
+    <div class=operaModal>
+        <span>
+            <%= link_to "Edit this departamento", edit_departamento_path(departamento) %>
+        </span>
+        <span>
+            <%= button_to "Destroy this departamento", departamento, method: :delete %>
+        </span>
+    </div>
+</div>

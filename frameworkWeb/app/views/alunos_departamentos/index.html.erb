@@ -1,0 +1,35 @@
+<h1>Alunos Departamentos</h1>
+
+<div id="link-top">
+  <%= link_to  "Home", root_path %>
+</div>
+
+
+<div id="aldp">
+  <table>
+    <thead>
+      <tr>
+        <th>Aluno</th>
+        <th>Departamento</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @aldp.each do |elem| %>
+        <%= render "table",  elem: elem %> 
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div id="link-bottom">
+<%= link_to  "new_aluno_departamento", new_alunos_departamento_path %>
+</div>
+
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span id="close-modal" class="close" data-controller="fade" data-action="click->fade#fade_out">&times;</span>
+      <% @aldp.each do |elem| %>
+        <%= render "modal",  elem: elem %> 
+      <% end %>
+  </div>
+</div>

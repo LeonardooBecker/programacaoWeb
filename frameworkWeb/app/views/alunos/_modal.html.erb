@@ -1,0 +1,24 @@
+<div id="opestado<%= aluno.id %>" style="display: none" class="allModal">
+    <div class="textModal">
+        <span>
+            Nome:
+            <%= aluno.nome %>
+        </span>
+        <span>
+            Sobrenome:
+            <%= aluno.sobrenome %>
+        </span>
+        <span>
+            Estado:
+            <%= aluno.estado.nome %>
+        </span>
+    </div>
+    <div class=operaModal>
+        <span>
+            <%= link_to "Edit this aluno", edit_aluno_path(aluno) %>
+        </span>
+        <span>
+            <%= button_to "Destroy this aluno", aluno, method: :delete %>
+        </span>
+    </div>
+</div>

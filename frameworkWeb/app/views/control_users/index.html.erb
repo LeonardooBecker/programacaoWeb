@@ -1,0 +1,32 @@
+<h1>Users</h1>
+<div id="link-top">
+<%= link_to  "Home", root_path %>
+</div>
+<div id="users">
+  <table>
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <%= render "table",  user: user %> 
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div id="link-bottom">
+<%= link_to  "new_user", control_users_new_path %>
+</div>
+
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span id="close-modal" class="close" data-controller="fade" data-action="click->fade#fade_out">&times;</span>
+      <% @users.each do |user| %>
+        <%= render "modal",  user: user %> 
+      <% end %>
+  </div>
+</div>

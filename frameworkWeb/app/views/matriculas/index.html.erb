@@ -1,0 +1,40 @@
+<p style="color: green"><%= notice %></p>
+<h1>Matriculas</h1>
+
+<div id="link-top">
+  <%= link_to  "Home", root_path %>
+</div>
+
+<div id="matriculas">
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Ano</th>
+        <th>Complemento</th>
+        <th>Aluno</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @matriculas.each do |matricula| %>
+        <%= render "table",  matricula: matricula %> 
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<% if current_user.role == 'admin' %>
+<div id="link-bottom">
+  <%= link_to "New matricula", new_matricula_path %>
+</div>
+<% end %>
+
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span id="close-modal" class="close" data-controller="fade" data-action="click->fade#fade_out">&times;</span>
+      <% @matriculas.each do |matricula| %>
+        <%= render "modal",  matricula: matricula %> 
+      <% end %>
+  </div>
+</div>
+

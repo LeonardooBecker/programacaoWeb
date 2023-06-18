@@ -1,0 +1,16 @@
+<h1>New Aluno_Departamento</h1>
+
+<div class="new_user">
+<%= form_tag alunos_departamentos_path do %>
+  <%= label_tag :aluno_id, "Aluno ID" %>
+  <%= number_field_tag :aluno_id %>
+
+  <%= label_tag :departamento_id, "Departamento ID" %>
+  <%= number_field_tag :departamento_id %>
+
+  <%= submit_tag "Create Aluno Departamento" %>
+<% end %>
+  <div class="showLinksBlack">
+    <%= link_to "Back to alunos_departamentos", alunos_departamentos_path %>
+  </div>
+</div>

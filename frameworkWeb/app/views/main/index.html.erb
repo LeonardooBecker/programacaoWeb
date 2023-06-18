@@ -1,0 +1,34 @@
+<div id="main-login">
+    <h1>Trabalho 4</h1>
+
+    <ul>
+        <% if user_signed_in? %>
+            <% if current_user.role == 'normal_user' %>
+                <li><strong>Usuário:</strong> <%= current_user.email %></li>
+            <% else %>
+                <li><strong>Admin:</strong> <%= current_user.email %></li>
+            <% end %>
+            <li><%= link_to  "Sign out", destroy_user_session_path, class: "main-sign" %></li>
+        <% else %>
+            <li><%= link_to  "Sign in", new_user_session_path, class: "main-sign" %></li>
+            <li><%= link_to  "Sign up", new_user_registration_path, class: "main-sign" %></li>
+        <% end  %>
+    </ul>
+    <br/>
+</div>
+
+<div id="main-links">
+    <h3>Tabelas disponíveis</h3>
+    <%= link_to  "Departamentos", departamentos_path, class: "main-links" %>
+    <%= link_to  "Estados", estados_path, class: "main-links" %>
+    <%= link_to  "Alunos", alunos_path, class: "main-links" %>
+    <%= link_to  "Matriculas", matriculas_path, class: "main-links" %>
+    <%= link_to  "Alunos Departamentos", alunos_departamentos_path, class: "main-links" %>
+    <% if @userAtual == "admin" %>
+        <%= link_to  "Users", control_users_index_path, class: "main-links" %>
+    <% end %>
+</div>
+
+<div data-controller="fade" data-action="click->fade#fade_in"></div>
+
+
