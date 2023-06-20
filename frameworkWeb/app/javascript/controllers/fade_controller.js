@@ -8,22 +8,6 @@ export default class extends Controller {
 
   disconnect() {
     document.removeEventListener("keydown", this.handleKeyDown.bind(this));
-    console.log("fasfa")
-
-    var href = $('a[href]:not([class])');
-  
-    var verifica=$(href).attr('href')
-
-    console.log(verifica)
-    if(verifica!=null)
-    {
-      var parts=verifica.split("/")
-
-      var div1 = $("<div class='sign'></div>");
-
-      if(parts[1]=='users')
-        $(href).wrapAll(div1);
-    }
   }
 
   fade_in() {

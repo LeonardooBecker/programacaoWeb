@@ -12,7 +12,7 @@ class ControlUsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to root_path, notice: "User created successfully."
+      redirect_to control_users_index_path, notice: "Criado com sucesso"
     else
       render :new
     end
